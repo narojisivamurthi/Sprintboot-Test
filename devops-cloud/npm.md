@@ -40,6 +40,56 @@ sequenceDiagram
 
 ---
 
+## 📚 Exhaustive NPM Commands Reference Matrix
+
+| Category | Command | Description & Typical Usage |
+| :--- | :--- | :--- |
+| **Initialization** | `npm init` | Interactively creates a new `package.json` file |
+| **Initialization** | `npm init -y` | Initializes `package.json` accepting all default values |
+| **Install (Production)**| `npm install <pkg>` / `npm i <pkg>` | Installs package into `dependencies` and updates `package-lock.json` |
+| **Install (Dev)** | `npm install -D <pkg>` / `npm i --save-dev <pkg>` | Installs package into `devDependencies` (tools, testing, build) |
+| **Install (Global)** | `npm install -g <pkg>` | Installs CLI package globally on system |
+| **Install (Exact)** | `npm install --save-exact <pkg>` | Installs package without `^` or `~` caret operators in `package.json` |
+| **Install (Clean CI)**| `npm ci` | Deletes `node_modules` and installs strictly from `package-lock.json` (CI/CD) |
+| **Package Removal** | `npm uninstall <pkg>` / `npm rm <pkg>` | Removes package from `node_modules` and `package.json` |
+| **Package Removal** | `npm uninstall -g <pkg>` | Removes globally installed package |
+| **Update & Outdated**| `npm outdated` | Checks registry to list packages with newer versions available |
+| **Update & Outdated**| `npm update` / `npm up` | Updates all packages to newest version obeying SemVer constraints |
+| **Update & Outdated**| `npm update <pkg>` | Updates specific package to latest matching version |
+| **Execution** | `npm run <script>` | Runs a custom script defined in `package.json` `scripts` object |
+| **Execution** | `npm test` / `npm t` | Alias shortcut to run `npm run test` |
+| **Execution** | `npm start` | Alias shortcut to run `npm run start` |
+| **Execution** | `npx <command>` | Executes CLI package binary without installing it globally |
+| **Local Symlinking** | `npm link` | Creates global symlink of current package folder for local testing |
+| **Local Symlinking** | `npm link <pkg-name>` | Links globally symlinked package into active project's `node_modules` |
+| **Unlinking** | `npm unlink` | Removes global symlink created by `npm link` |
+| **Workspaces** | `npm run <script> -w <pkg>` | Runs npm script inside a specific workspace sub-package |
+| **Workspaces** | `npm run <script> --workspaces` | Runs npm script across ALL workspace sub-packages in parallel |
+| **Workspaces** | `npm i <pkg> -w <workspace-name>` | Installs package into a specific workspace sub-package |
+| **Security & Audits**| `npm audit` | Scans dependency tree against known CVE vulnerability databases |
+| **Security & Audits**| `npm audit fix` | Automatically updates vulnerable dependencies to safe versions |
+| **Security & Audits**| `npm audit fix --force` | Force updates dependencies to fix vulnerabilities (may introduce breaking changes) |
+| **Registry & Auth** | `npm login` | Authenticates user credentials with NPM Registry |
+| **Registry & Auth** | `npm logout` | Logs out user from active registry session |
+| **Registry & Auth** | `npm whoami` | Displays currently authenticated NPM username |
+| **Registry & Auth** | `npm config get registry` | Returns current active registry URL (`registry.npmjs.org`) |
+| **Publishing** | `npm publish` | Publishes package to public NPM registry |
+| **Publishing** | `npm publish --access public` | Publishes scoped package (`@myorg/my-pkg`) publicly |
+| **Publishing** | `npm publish --dry-run` | Simulates package publishing without uploading tarball to registry |
+| **Publishing** | `npm pack` | Creates `.tgz` tarball asset locally exactly as it would be published |
+| **Version Bumping** | `npm version patch` | Bumps `PATCH` version ($1.0.0 \rightarrow 1.0.1$) and creates Git tag |
+| **Version Bumping** | `npm version minor` | Bumps `MINOR` version ($1.0.0 \rightarrow 1.1.0$) and creates Git tag |
+| **Version Bumping** | `npm version major` | Bumps `MAJOR` version ($1.0.0 \rightarrow 2.0.0$) and creates Git tag |
+| **Cache & Cleanup** | `npm cache clean --force` | Clears local NPM download cache |
+| **Cache & Cleanup** | `npm cache verify` | Verifies integrity of cached package data |
+| **Cache & Cleanup** | `npm prune` | Removes extraneous packages in `node_modules` not in `package.json` |
+| **Cache & Cleanup** | `npm dedupe` | Flatten and deduplicate identical transitive dependency sub-trees |
+| **Inspection** | `npm list` / `npm ls` | Displays installed dependency tree |
+| **Inspection** | `npm list --depth=0` | Displays top-level direct dependencies only |
+| **Inspection** | `npm info <pkg>` / `npm view <pkg>` | Shows package metadata, versions, and dependencies from registry |
+
+---
+
 ## 📑 Phase 1: NPM Core & Package Architecture
 
 ### Module 1: Introduction to NPM & Node Package Ecosystem

@@ -10,6 +10,8 @@ Welcome to your central master repository! All 19 interview preparation guides a
 - 🍃 **[spring-boot.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/backend/spring-boot.md)** — *Spring Boot, IoC/DI, Spring Security, AOP, Resilience4j, Kafka, Actuator*
 - 🎸 **[django.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/backend/django.md)** — *Django & DRF, MVT Architecture, ORM N+1 Fixes (`select_related`/`prefetch_related`), ViewSets, Celery*
 - 🟢 **[node-js.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/backend/node-js.md)** — *Node.js & Express, Libuv 6-Phase Event Loop, Streams, Backpressure, NestJS, WebSockets*
+- 🕸️ **[graphql.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/backend/graphql.md)** — *GraphQL API, SDL Types, Resolvers, DataLoader N+1 Batching Fix, Query Cost Analysis, Apollo Federation*
+- 🏗️ **[microservices.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/backend/microservices.md)** — *Microservices Architecture, Service Discovery (Eureka), API Gateway, Circuit Breaker (Resilience4j), Saga Pattern, CQRS*
 
 ### 🌐 Frontend Engineering & Web Technologies (`/frontend`)
 - ⚛️ **[react-js.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/frontend/react-js.md)** — *React.js, Virtual DOM & Fiber Lanes, Lifecycles, All Hooks, Custom Hooks Machine Coding*
@@ -28,15 +30,24 @@ Welcome to your central master repository! All 19 interview preparation guides a
 - ☕ **[java.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/languages/java.md)** — *Java & JVM, JVM Memory Model, G1GC/ZGC, HashMap Treeification, Generics PECS, `CompletableFuture`*
 
 ### 🗄️ Database Systems & Data Architecture (`/databases`)
+- 🔴 **[redis.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/databases/redis.md)** — *Redis In-Memory Datastore, Single-Threaded Multiplexed Engine, Data Structures, Cache-Aside, RDB/AOF, Eviction, Cluster*
 - 🗄️ **[sql.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/databases/sql.md)** — *SQL & Relational Databases, B-Tree Index Seek vs Scan, Normalization 1NF-BCNF, Isolation Levels, CTEs*
 - 🍃 **[mongodb.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/databases/mongodb.md)** — *MongoDB & NoSQL, Sharded Cluster & WiredTiger Write Path, Aggregation Pipeline (`$lookup`), ESR Rule*
 
 ### ☁️ Cloud, DevOps & Tools (`/devops-cloud`)
+- 📏 **[eslint.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/devops-cloud/eslint.md)** — *ESLint, AST Static Code Analysis, Flat Config (`eslint.config.mjs`), `@typescript-eslint`, Prettier Integration, Husky*
+- 🏢 **[monorepo.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/devops-cloud/monorepo.md)** — *Monorepo Architecture, Turborepo & Nx, Package Workspaces (`pnpm-workspace`), Remote Caching, Affected Task Execution*
 - ☁️ **[azure.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/devops-cloud/azure.md)** — *Microsoft Azure, Resource Hierarchy, App Service Slots, Managed Identities, VNets/NSGs, ExpressRoute, Key Vault*
+- ⚡ **[esbuild.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/devops-cloud/esbuild.md)** — *Esbuild, Go Multi-Core Parallel Architecture, 10x-100x Faster Build Speed, `build()` & `transform()` APIs, Vite Engine*
+- 🛡️ **[sonar.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/devops-cloud/sonar.md)** — *SonarQube & SonarCloud, Static Security Analysis (SAST), Quality Gates, Bugs vs Vulnerabilities vs Code Smells, Cognitive Complexity*
+- 📦 **[webpack.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/devops-cloud/webpack.md)** — *Webpack 5, Bundling & Dependency Graph, 5 Core Concepts (Entry, Output, Loaders, Plugins, Mode), HMR, Code Splitting, Tree Shaking*
+- 🟨 **[babel.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/devops-cloud/babel.md)** — *Babel Compiler, 3-Stage Pipeline (Parse AST, Transform, Generate), Presets vs Plugins, Polyfilling (`core-js`), `@babel/preset-env`*
 - 📦 **[npm.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/devops-cloud/npm.md)** — *NPM & Package Management, Dependency Resolution, SemVer (`^` vs `~`), `npm ci`, Workspaces, pnpm*
 - 🐙 **[git.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/devops-cloud/git.md)** — *Git Version Control, 4-Stage Architecture, Merging vs Rebasing, GitFlow vs Trunk-based, `git reset`, `git reflog`*
 - 🚀 **[CI-CD.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/devops-cloud/CI-CD.md)** — *CI/CD & DevOps Automation, Pipeline Architecture, Blue-Green vs Canary Deployments, GitHub Actions*
 - ⚙️ **[jenkins.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/devops-cloud/jenkins.md)** — *Jenkins Automation Server, Controller-Agent Architecture, Declarative Pipelines, Docker/K8s build agents*
 
-### 🤖 Cutting-Edge AI & Architecture (`/ai`)
-- 🤖 **[agent-ai.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/ai/agent-ai.md)** — *Agentic AI & Autonomous AI Agents, ReAct Cognitive Loop, ToT/GoT Planning, Vector DB Memory, LangGraph*
+### 🤖 Artificial Intelligence & LLM Engineering (`/ai`)
+- 🧠 **[generative-ai.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/ai/generative-ai.md)** — *Generative AI, Transformer Architecture, Multi-Head Self-Attention, Decoder-Only LLMs, Temperature/Top-P, PEFT/LoRA, RAG Pipeline*
+- 🤖 **[github-copilot.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/ai/github-copilot.md)** — *GitHub Copilot Architecture, Context Harvesting (Open Tabs / Jaccard Similarity), Public Code Filter, Custom Models, Prompting Patterns*
+- 🤖 **[agent-ai.md](file:///c:/Users/naroj/Desktop/Siva%20Learning/Sprintboot-Test/ai/agent-ai.md)** — *Agentic AI Architecture, ReAct Loop (Reason + Act), Memory, Tools, ToT/GoT Planning, Vector DBs, LangGraph, Human-in-the-Loop*

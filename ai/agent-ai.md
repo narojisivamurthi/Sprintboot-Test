@@ -1,215 +1,211 @@
-# 🤖 Agentic AI & Autonomous AI Agents Master Roadmap & Learning Progress Tracker
+# 🤖 Agentic AI & Autonomous Agents Master Roadmap & Learning Progress Tracker
 
-## 🏛️ Agentic AI Architecture & Cognitive Engine
+## 🏛️ Agentic AI Architecture & Cognitive Execution Engine
 
 ### 🏗️ Agentic AI Cognitive Loop Architecture
 ```mermaid
 graph TD
-    UserReq["🌐 User Goal / Task Input"] --> Perception["👁️ Perception & Input Parser"]
+    UserGoal["🎯 User Goal / Complex Task Directive"] --> AgentCore["🧠 Agent Cognitive Loop Engine"]
 
-    subgraph CognitiveEngine ["🧠 LLM Reasoning & Cognitive Engine"]
-        Planner["📋 Planning & Task Decomposition (CoT / ToT)"]
-        Reflection["🔄 Self-Reflection & Evaluation"]
-        Planner --> Reflection
+    subgraph PerceptionMemory ["🧠 Memory & Planning Layer"]
+        ShortMemory["⚡ Short-Term Working Memory (Context Window)"]
+        LongMemory["💾 Long-Term Vector Memory (Vector DB)"]
+        Planner["📋 Planning & Decomposition Engine (ToT / GoT)"]
+        ShortMemory --- LongMemory --- Planner
     end
 
-    Perception --> CognitiveEngine
+    AgentCore --> PerceptionMemory
 
-    subgraph MemorySystem ["💾 Memory Systems"]
-        STM["⚡ Short-Term Memory (Context Window / Chat History)"]
-        LTM["📚 Long-Term Memory (Vector DB: Qdrant / Chroma / Pinecone)"]
+    subgraph ToolExecution ["🛠️ Action Execution & Tool Invocation"]
+        Tool1["🌐 Web Search / Scraper Tool"]
+        Tool2["💻 Code Execution Sandbox (Terminal / Python)"]
+        Tool3["📂 File System Read / Write Tool"]
     end
 
-    CognitiveEngine <--> MemorySystem
-
-    subgraph ToolUse ["🛠️ Tool Execution & Environment"]
-        WebSearch["🌐 Web Search API"]
-        CodeExec["🐍 Python Code Execution Sandbox"]
-        DBQuery["🗄️ Database Query Tool"]
-        FileIO["📄 File System Operations"]
-    end
-
-    CognitiveEngine -->|Execute Action / Tool Call| ToolUse
-    ToolUse -->|Return Observation / Result| CognitiveEngine
-
-    CognitiveEngine -->|Task Complete| Output["🎯 Final Answer / Artifact"]
+    Planner -->|Select Tool & Generate Parameters| ToolExecution
+    ToolExecution -->|Return Execution Output / Observation| AgentCore
+    AgentCore -->|Evaluate Goal Convergence| UserGoal
 ```
 
-### 🔄 Multi-Agent Collaboration Sequence Diagram (Orchestrator-Worker)
+### 🔄 ReAct (Reasoning + Acting) Cycle Sequence Diagram
 ```mermaid
 sequenceDiagram
     autonumber
-    actor User as User / Application
-    participant Orch as 👑 Orchestrator Agent (Planner)
-    participant Research as 🔍 Research Agent
-    participant Code as 💻 Coding Agent
-    participant QA as 🧪 QA / Critic Agent
-    participant VectorDB as 📚 Long-Term Memory (Vector DB)
+    actor User as User Request
+    participant Agent as ReAct Cognitive Agent
+    participant LLM as LLM Reasoning Engine
+    participant Tool as System Tool (Terminal / Web API)
 
-    User->>Orch: Submit Complex Goal ("Build & Test Web Scraper")
-    Orch->>VectorDB: Query Past Execution Memories & Guidelines
-    VectorDB-->>Orch: Return Relevant Context
-    Orch->>Orch: Decompose Task into Sub-Goals
-
-    Orch->>Research: Delegate Task 1: "Find target API schemas"
-    Research->>Research: Execute Web Search Tool
-    Research-->>Orch: Return API Schema Documentation
-
-    Orch->>Code: Delegate Task 2: "Write Scraper Code with Schemas"
-    Code->>Code: Execute Python Code Generator
-    Code-->>Orch: Return Draft Python Script
-
-    Orch->>QA: Delegate Task 3: "Validate & Review Code"
-    QA->>QA: Execute Code Sandbox & Test Suite
-    alt Code Has Bugs
-        QA-->>Orch: Return Error Traceback & Feedback
-        Orch->>Code: Send Feedback to Revise Code
-    else Code Passes Tests
-        QA-->>Orch: Approval Verified
-        Orch-->>User: Return Final Executed Solution & Walkthrough
+    User->>Agent: "Fix failing test in user_service.py"
+    loop ReAct Loop (Until Task Goal Achieved)
+        Agent->>LLM: 1. THOUGHT: "I need to run PyTest to locate the failing assertion."
+        LLM-->>Agent: Action: execute_command("pytest test/user_service_test.py")
+        Agent->>Tool: 2. ACTION: Run PyTest Command
+        Tool-->>Agent: 3. OBSERVATION: "AssertionError: Expected 200, got 401 on line 42"
+        Agent->>LLM: THOUGHT: "Line 42 failed due to missing auth header. I must inspect user_service.py."
+        LLM-->>Agent: Action: view_file("user_service.py")
+        Agent->>Tool: ACTION: View File Contents
+        Tool-->>Agent: OBSERVATION: File Content Output
+        Agent->>LLM: THOUGHT: "Auth header key missing. I will patch the code now."
+        LLM-->>Agent: Action: replace_file_content(...)
+        Agent->>Tool: ACTION: Patch Code File
     end
+    Agent-->>User: "Failing test resolved and verified cleanly!"
 ```
 
 ---
 
-## 📑 Phase 1: Agentic AI Architecture & Core Concepts
+## 📑 Phase 1: Cognitive Architecture & Reasoning Loops
 
-### Module 1: Introduction to Agentic AI
-- [x] **What is Agentic AI?**
-  - Autonomous AI systems capable of perceiving environments, making independent decisions, planning sub-goals, executing tool calls, and reflecting on errors to achieve complex targets.
-- [x] **Passive LLM vs Active Agentic Systems**
-  - **Passive Prompting**: Single input $\rightarrow$ single output completion (stateless).
-  - **Agentic Loop**: Autonomous iterative loops of Reasoning $\rightarrow$ Action $\rightarrow$ Observation $\rightarrow$ Reflection until completion.
-- [x] **Degrees of Autonomy**
-  - Level 1: Prompt-assisted $\rightarrow$ Level 2: Router/Selector $\rightarrow$ Level 3: Tool-using Agent $\rightarrow$ Level 4: Autonomous Multi-Agent Systems.
+### Module 1: What is Agentic AI?
+- [x] **Agentic AI Paradigm**
+  - Shift from passive LLM chat prompts to **autonomous, goal-driven AI agents** that plan, perceive environments, invoke external tools, self-correct errors, and execute complex multi-step workflows.
 
-### Module 2: The ReAct Paradigm (Reasoning + Acting)
-- [x] **ReAct Framework**
-  - Interleaves **Thought** (reasoning step), **Action** (invoking an external tool), and **Observation** (reading tool output) iteratively.
-  - Prevents hallucination by grounding reasoning in real-world tool execution feedback.
+### Module 2: ReAct Cognitive Loop (Reason + Act)
+- [x] **Thought-Action-Observation Loop**
+  - **Thought**: LLM evaluates goal state and reasons about next step.
+  - **Action**: Agent selects and executes an external Tool.
+  - **Observation**: Agent reads tool output and loops until goal is achieved.
 
----
-
-## ⚡ Phase 2: Planning, Memory & Vector Databases
-
-### Module 3: Planning Strategies & Task Decomposition
-- [x] **Chain-of-Thought (CoT)**: Step-by-step sequential reasoning prompts.
-- [x] **Tree-of-Thoughts (ToT)**: Explores multiple reasoning paths simultaneously using tree search (BFS/DFS) and backtracks on dead ends.
-- [x] **Graph-of-Thoughts (GoT)**: Networks thoughts as arbitrary directed graphs allowing combination of multiple independent sub-solutions.
-- [x] **Self-Reflection & Critique (Reflexion)**: Agent evaluates its own tool execution results and revises failed plans automatically.
-
-### Module 4: Memory Systems & Context Engineering
-- [x] **Short-Term Memory**: In-context scratchpad and active conversation history within the LLM context window.
-- [x] **Long-Term Memory (Vector DBs)**: Persistent storage of past experiences and documents using Vector Databases (Qdrant, Chroma, Pinecone, Milvus) via Dense Embeddings.
-- [x] **RAG (Retrieval-Augmented Generation)**: Hybrid semantic search retrieving relevant domain context before generating reasoning steps.
+### Module 3: Advanced Reasoning & Planning Frameworks
+- [x] **Chain-of-Thought (CoT)**: Linear step-by-step reasoning.
+- [x] **Tree-of-Thoughts (ToT)**: Explores multiple reasoning branches with backtracking.
+- [x] **Graph-of-Thoughts (GoT)**: Combines and forks non-linear reasoning paths.
+- [x] **Self-Correction & Reflection**: Agent reviews its own execution history to fix errors dynamically.
 
 ---
 
-## 🛠️ Phase 3: Tool Use, Function Calling & Frameworks
+## ⚡ Phase 2: Memory Systems, Tools & Multi-Agent Teams
 
-### Module 5: Tool Calling & Function Calling
-- [x] **Function Calling JSON Schemas**
-  - Defining structured JSON schemas describing available tools (name, description, parameter types).
-- [x] **Tool Execution Sandboxing**
-  - Safely running generated code/API calls inside restricted Docker or WebAssembly (WASM) sandboxes.
+### Module 4: Agent Memory Architecture
+- [x] **Short-Term Memory**: In-context working memory of current trajectory steps.
+- [x] **Long-Term Memory**: Vector database indexing past conversation episodes and semantic knowledge (`Pinecone`, `Qdrant`).
 
-### Module 6: Agentic Frameworks
-- [x] **LangGraph**: State graph framework modeling agents as persistent state machines with cyclic nodes and edges.
-- [x] **CrewAI**: Role-based multi-agent framework where specialized agents (Researcher, Writer, Coder) collaborate.
-- [x] **AutoGen (Microsoft)**: Conversational multi-agent framework enabling complex multi-agent chats.
-- [x] **LlamaIndex**: Data-centric agent framework built for complex RAG pipelines and structured query synthesis.
+### Module 5: Tool Calling & Function Execution
+- [x] **OpenAI Function Calling & JSON Schema**
+  - Formatting tool specifications into JSON Schema definitions allowing LLMs to produce structured tool invocation payloads.
+- [x] **Sandboxed Code Execution**
+  - Safely executing Python code or bash terminal commands inside isolated Docker containers or WebAssembly runtimes.
 
----
+### Module 6: Multi-Agent Orchestration Architectures
+- [x] **Supervisor-Worker Pattern**
+  - Central Manager Agent delegates sub-tasks to specialized worker agents (e.g. Researcher, Coder, Tester) and aggregates results.
+- [x] **Hierarchical & Peer-to-Peer Teams**
+  - Autonomous agents communicating asynchronously via message channels to solve multi-domain problems.
 
-## ⚙️ Phase 4: Multi-Agent Systems, Governance & Safety
-
-### Module 7: Multi-Agent System (MAS) Architectures
-- [x] **Orchestrator-Worker Architecture**: Central Manager agent delegates sub-tasks to specialized worker agents.
-- [x] **Peer-to-Peer Debate**: Agents critique each other's outputs to reach high-confidence consensus and eliminate hallucinations.
-
-### Module 8: Agent Safety, Guardrails & Cost Management
-- [x] **Human-in-the-Loop (HITL)**: Requiring explicit human approval before executing sensitive high-risk tools (file deletes, payment APIs, database drops).
-- [x] **Guardrails & Prompt Injection Defense**: Input/output filtering protecting agents against prompt injection and unauthorized tool escalation.
-- [x] **Token & Cost Budgeting**: Setting max iteration limits, timeout bounds, and token budgets to prevent infinite agent execution loops.
+### Module 7: Human-in-the-Loop (HITL) Safeguards
+- [x] **Approval Breakpoints**
+  - Pausing agent execution to request explicit human confirmation before executing high-risk actions (file edits, API writes, deployments).
 
 ---
 
-## 🛠️ Phase 5: Practical Python ReAct Agent Loop Implementation
+## 🛠️ Phase 3: Frameworks, Vector DBs & Protocols
 
-### Pure Python ReAct Agent Loop (Reasoning + Action + Observation)
+### Module 8: State Graph Orchestration (LangGraph)
+- [x] **LangGraph Architecture**
+  - Stateful multi-agent graph orchestration framework where Nodes represent agent actions and Edges represent dynamic decision transitions with full checkpointing.
+
+### Module 9: Multi-Agent Frameworks (AutoGen & CrewAI)
+- [x] **Microsoft AutoGen & CrewAI**
+  - Frameworks enabling multi-agent role-playing, automated task delegation, and collaborative problem solving.
+
+### Module 10: Model Context Protocol (MCP)
+- [x] **Model Context Protocol (MCP)**
+  - Open standard protocol connecting AI agents to local/remote data sources, developer tools, and API servers securely.
+
+### Module 11: Agent Benchmarks & Evaluation
+- [x] **SWE-bench & GAIA Benchmarks**
+  - Industry benchmark suites evaluating autonomous agents on real-world software engineering tasks and multi-modal problem solving.
+
+---
+
+## 🚀 Phase 4: Production Agents & Advanced RAG
+
+### Module 12: Production ReAct Agent Implementation
+- [x] **LangGraph ReAct Agent**
+  - Building production stateful agents with custom tools, error recovery, and persistence memory.
+
+### Module 13: Enterprise Safety & Guardrails
+- [x] **Token Budget & Iteration Caps**
+  - Preventing infinite loops by enforcing maximum iteration limits (`max_iterations = 15`) and token spend budgets.
+
+### Module 14: Autonomous Code Generation & Refactoring Agents
+- [x] **Autonomous Software Engineering**
+  - Agents inspecting repositories, identifying bugs, running tests, patching files, and submitting Pull Requests autonomously.
+
+### Module 15: Agentic RAG (Self-RAG & Corrective RAG)
+- [x] **Self-RAG & CRAG**
+  - Agents dynamically evaluating retrieved document relevance, rewriting search queries on failure, and verifying response accuracy.
+
+---
+
+## 🛠️ Phase 5: Practical LangGraph ReAct Agent Code
+
+### Complete Production LangGraph ReAct Agent (`agent.py`)
 ```python
-import json
-import re
+from typing import Annotated, TypedDict
+from langchain_openai import ChatOpenAI
+from langchain_core.tools import tool
+from langgraph.graph import StateGraph, END
+from langgraph.graph.message import add_messages
+from langgraph.prebuilt import ToolNode, tools_condition
 
-class ReActAgent:
-    def __init__(self, llm_client, tools):
-        self.llm = llm_client
-        self.tools = {tool.name: tool for tool in tools}
-        self.system_prompt = self._build_system_prompt()
+# 1. Define Custom Tool
+@tool
+def calculate_salary_tax(salary: float) -> str:
+  """Calculates tax deduction for a given annual salary."""
+  tax = salary * 0.25
+  return f"Annual tax deduction for ${salary} is ${tax}."
 
-    def _build_system_prompt(self):
-        tool_desc = "\n".join([f"- {name}: {t.description}" for name, t in self.tools.items()])
-        return f"""You operate in a ReAct loop (Thought, Action, Observation).
-Available Tools:
-{tool_desc}
+tools = [calculate_salary_tax]
+tool_node = ToolNode(tools)
 
-Use the following strict format:
-Thought: Reason about what to do next.
-Action: tool_name({"key": "value"})
-Observation: <result will be provided>
+# 2. Define Agent State Schema
+class AgentState(TypedDict):
+  messages: Annotated[list, add_messages]
 
-When finished, respond with:
-Thought: I have the final answer.
-Final Answer: <your response>"""
+# 3. Define LLM with Bound Tools
+llm = ChatOpenAI(model="gpt-4o", temperature=0.0).bind_tools(tools)
 
-    def run(self, user_query, max_iterations=5):
-        history = f"User Query: {user_query}\n"
-        
-        for iteration in range(max_iterations):
-            prompt = f"{self.system_prompt}\n\n{history}\nThought:"
-            response = self.llm.generate(prompt)
-            print(f"\n--- Iteration {iteration + 1} ---")
-            print(f"Thought: {response}")
+def call_model(state: AgentState):
+  response = llm.invoke(state["messages"])
+  return {"messages": [response]}
 
-            if "Final Answer:" in response:
-                return response.split("Final Answer:")[1].strip()
+# 4. Build LangGraph Workflow
+workflow = StateGraph(AgentState)
+workflow.add_node("agent", call_model)
+workflow.add_node("tools", tool_node)
 
-            # Parse Action
-            action_match = re.search(r"Action:\s*(\w+)\((.*)\)", response)
-            if action_match:
-                tool_name, tool_args_str = action_match.groups()
-                if tool_name in self.tools:
-                    try:
-                        args = json.loads(tool_args_str)
-                        observation = self.tools[tool_name].execute(**args)
-                    except Exception as e:
-                        observation = f"Tool Error: {str(e)}"
-                else:
-                    observation = f"Error: Tool '{tool_name}' not found."
-                
-                print(f"Observation: {observation}")
-                history += f"\nThought: {response}\nObservation: {observation}"
-            else:
-                history += f"\nThought: {response}\nObservation: Invalid action format."
+workflow.set_entry_point("agent")
+workflow.add_conditional_edges("agent", tools_condition)
+workflow.add_edge("tools", "agent")
 
-        return "Task exceeded maximum iterations."
+app = workflow.compile()
+
+# 5. Run ReAct Agent Execution
+inputs = {"messages": [("user", "What is the tax for a $120,000 salary?")]}
+for chunk in app.stream(inputs, stream_mode="values"):
+  chunk["messages"][-1].pretty_print()
 ```
 
 ---
 
 ## 🎯 Top Agentic AI Senior Interview Q&A Cheatsheet (Master List)
 
-### Q1: What is the difference between Passive Prompting (RAG) and Agentic AI?
-Passive RAG follows a single linear pipeline: Input $\rightarrow$ Embed $\rightarrow$ Retrieve $\rightarrow$ Single LLM Answer. Agentic AI operates in a dynamic, iterative cognitive loop: Input $\rightarrow$ Plan Sub-goals $\rightarrow$ Select Tool $\rightarrow$ Execute Action $\rightarrow$ Read Observation $\rightarrow$ Self-Reflect & Revise Plan $\rightarrow$ Repeat until complete.
+### Q1: What is the main difference between standard LLM text completion and Agentic AI?
+Standard LLMs perform static, single-turn text completion based purely on input prompt context. Agentic AI uses a continuous cognitive loop (ReAct) where an autonomous agent plans steps, perceives environments, dynamically selects and invokes external tools (web search, terminal, databases), observes tool results, and iteratively self-corrects until a complex goal is achieved.
 
-### Q2: Explain the ReAct (Reasoning + Acting) pattern in AI Agents.
-ReAct interleaves reasoning thoughts with action executions. The LLM writes a "Thought" explaining its plan, selects an "Action" (tool invocation), receives an "Observation" (tool output), and writes the next "Thought" based on that real-world feedback, grounding the agent and eliminating hallucinations.
+### Q2: How does the ReAct (Reason + Act) loop operate?
+ReAct combines reasoning and acting in an iterative loop:
+1. **Thought**: The LLM analyzes the current goal state and decides what action to take next.
+2. **Action**: The agent executes a specific external tool call with parameters.
+3. **Observation**: The agent reads the tool's output result and feeds it back into context to decide the next step.
 
-### Q3: How do Vector Databases provide Long-Term Memory to AI Agents?
-Vector DBs store high-dimensional dense embeddings of past agent experiences, execution traces, and domain documents. When an agent receives a task, it queries the Vector DB using semantic similarity search (Cosine/Dot Product) to retrieve relevant past memories into its short-term context window.
+### Q3: What is LangGraph and why is it preferred over linear chains for multi-agent systems?
+LangGraph is a stateful orchestration framework that models agent workflows as **cyclic graphs**. Unlike linear chains (LangChain Sequential Chains), LangGraph supports loops, branching decisions, persistent state checkpointing, multi-agent communication, and Human-in-the-Loop (HITL) approval breakpoints natively.
 
-### Q4: Why is LangGraph preferred over traditional sequential chains for complex agents?
-Traditional chains are linear and acyclic. LangGraph models agents as stateful graphs allowing cycles, branching, conditional edges, and persistent state checkpoints. This enables loops for self-correction, human-in-the-loop interruptions, and complex multi-agent coordination.
+### Q4: How do Human-in-the-Loop (HITL) safeguards work in autonomous AI agents?
+HITL introduces approval interrupts into an agent's execution graph. Before executing high-risk tool actions (such as dropping a database table, modifying core code, or sending an email), the graph pauses and waits for an external human signal (Approve / Reject / Edit payload) before proceeding.
 
-### Q5: How do you prevent infinite execution loops and excessive token costs in AI Agents?
-Implement strict guardrails: (1) Hard caps on maximum iteration counts (`max_iterations=10`), (2) Wall-clock timeout limits, (3) Token budget thresholds, (4) Cycle detection tracking repeated identical tool calls, and (5) Human-in-the-Loop (HITL) triggers for critical operations.
+### Q5: What is the Model Context Protocol (MCP)?
+MCP is an open standard protocol introduced by Anthropic that provides a unified, secure interface for connecting AI agents to external data sources, enterprise tools, and local/remote APIs without requiring custom ad-hoc integration code for every provider.
