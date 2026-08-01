@@ -192,7 +192,36 @@ Array.prototype.myReduce = function (callback, initialValue) {
 };
 ```
 
-### 3. Debounce Function Implementation
+### 3. Custom `Array.prototype.myFilter` Polyfill
+```javascript
+Array.prototype.myFilter = function (callback) {
+  if (typeof callback !== 'function') throw new TypeError('Callback must be a function');
+  const result = [];
+  for (let i = 0; i < this.length; i++) {
+    if (Object.prototype.hasOwnProperty.call(this, i)) {
+      if (callback(this[i], i, this)) {
+        result.push(this[i]);
+      }
+    }
+  }
+  return result;
+};
+```
+
+### 4. Custom `Function.prototype.myBind` Polyfill
+```javascript
+Function.prototype.myBind = function (context = {}, ...args) {
+  if (typeof this !== 'function') {
+    throw new TypeError('Cannot be bound, invalid callable');
+  }
+  const fn = this;
+  return function (...innerArgs) {
+    return fn.apply(context, [...args, ...innerArgs]);
+  };
+};
+```
+
+### 5. Debounce Function Implementation
 ```javascript
 function debounce(fn, delay) {
   let timerId;
