@@ -1,48 +1,182 @@
 package com.example.employee.service;
 
+import com.example.employee.dto.EmployeeRequestDTO;
+import com.example.employee.dto.EmployeeResponseDTO;
+import com.example.employee.entity.Department;
 import com.example.employee.entity.Employee;
+import com.example.employee.exception.DuplicateResourceException;
 import com.example.employee.exception.ResourceNotFoundException;
+import com.example.employee.mapper.EmployeeMapper;
+import com.example.employee.repository.DepartmentRepository;
 import com.example.employee.repository.EmployeeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final DepartmentRepository departmentRepository;
+    private final EmployeeMapper employeeMapper;
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository,
+                           DepartmentRepository departmentRepository,
+                           EmployeeMapper employeeMapper) {
         this.employeeRepository = employeeRepository;
+        this.departmentRepository = departmentRepository;
+        this.employeeMapper = employeeMapper;
     }
 
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+    @Transactional(readOnly = true)
+    public List<EmployeeResponseDTO> getAllEmployees() {
+        return employeeRepository.findAll().stream()
+                .map(employeeMapper::toResponseDTO)
+                .collect(Collectors.toList());
     }
 
-    public Employee getEmployeeById(Long id) {
-        return employeeRepository.findById(id)
+    @Transactional(readOnly = true)
+    public Page<EmployeeResponseDTO> getEmployeesPaginated(int page, int size, String sortBy, String sortDir) {
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())
+                ? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return employeeRepository.findAll(pageable).map(employeeMapper::toResponseDTO);
+    }
+
+    @Transactional(readOnly = true)
+    public EmployeeResponseDTO getEmployeeById(Long id) {
+        Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with ID: " + id));
+        return employeeMapper.toResponseDTO(employee);
     }
 
-    public Employee saveEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    @Transactional
+    public EmployeeResponseDTO createEmployee(EmployeeRequestDTO dto) {
+        if (dto.getEmail() != null && employeeRepository.existsByEmail(dto.getEmail())) {
+            throw new DuplicateResourceException("Employee already exists with email: " + dto.getEmail());
+        }
+        validateSalary(dto);
+        Department department = resolveDepartment(dto);
+        Employee employee = employeeMapper.toEntity(dto, department);
+        Employee savedEmployee = employeeRepository.save(employee);
+        return employeeMapper.toResponseDTO(savedEmployee);
     }
 
-    public Employee updateEmployee(Long id, Employee updatedEmployee) {
-        Employee existingEmployee = getEmployeeById(id);
-        existingEmployee.setName(updatedEmployee.getName());
-        existingEmployee.setDepartment(updatedEmployee.getDepartment());
-        existingEmployee.setSalary(updatedEmployee.getSalary());
-        return employeeRepository.save(existingEmployee);
+    @Transactional
+    public EmployeeResponseDTO updateEmployee(Long id, EmployeeRequestDTO dto) {
+        Employee existingEmployee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with ID: " + id));
+
+        if (dto.getEmail() != null && !existingEmployee.getEmail().equalsIgnoreCase(dto.getEmail())
+                && employeeRepository.existsByEmail(dto.getEmail())) {
+            throw new DuplicateResourceException("Employee already exists with email: " + dto.getEmail());
+        }
+
+        validateSalary(dto);
+        Department department = resolveDepartment(dto);
+
+        existingEmployee.setName(dto.getName());
+        existingEmployee.setEmail(dto.getEmail());
+        existingEmployee.setDepartment(department);
+        existingEmployee.setDesignation(dto.getDesignation());
+        existingEmployee.setSalary(dto.getSalary());
+        existingEmployee.setJoiningDate(dto.getJoiningDate());
+        existingEmployee.setCity(dto.getCity());
+        existingEmployee.setStatus(dto.getStatus());
+
+        Employee updatedEmployee = employeeRepository.save(existingEmployee);
+        return employeeMapper.toResponseDTO(updatedEmployee);
     }
 
+    private void validateSalary(EmployeeRequestDTO dto) {
+        if (dto.getSalary() <= 0) {
+            throw new IllegalArgumentException("Salary must be greater than zero");
+        }
+
+        LocalDate joiningDate = dto.getJoiningDate() != null ? dto.getJoiningDate() : LocalDate.now();
+        LocalDate now = LocalDate.now();
+        
+        int experienceYears = 1;
+        if (joiningDate.isBefore(now)) {
+            experienceYears = Math.max(1, Period.between(joiningDate, now).getYears());
+        }
+
+        double baseYearlyRate = 12000.0;
+        String designation = dto.getDesignation() != null ? dto.getDesignation().toLowerCase() : "";
+        if (designation.contains("senior") || designation.contains("lead")) {
+            baseYearlyRate = 18000.0;
+        } else if (designation.contains("architect") || designation.contains("manager") || designation.contains("director")) {
+            baseYearlyRate = 22000.0;
+        }
+
+        double minRequiredSalary = experienceYears * baseYearlyRate;
+
+        if (dto.getSalary() < minRequiredSalary) {
+            throw new IllegalArgumentException(String.format(
+                    "Salary of $%.2f is invalid. Minimum required salary is $%.2f for '%s' with %d year(s) of experience ($%.2f base/year).",
+                    dto.getSalary(), minRequiredSalary, dto.getDesignation(), experienceYears, baseYearlyRate
+            ));
+        }
+    }
+
+    @Transactional
     public void deleteEmployee(Long id) {
-        Employee existingEmployee = getEmployeeById(id);
+        Employee existingEmployee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with ID: " + id));
         employeeRepository.delete(existingEmployee);
     }
 
-    public List<Employee> getEmployeesByDepartment(String department) {
-        return employeeRepository.findByDepartment(department);
+    @Transactional(readOnly = true)
+    public List<EmployeeResponseDTO> getEmployeesByDepartment(Long departmentId) {
+        return employeeRepository.findByDepartmentId(departmentId).stream()
+                .map(employeeMapper::toResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public Page<EmployeeResponseDTO> getEmployeesByDepartmentPaginated(Long departmentId, int page, int size, String sortBy, String sortDir) {
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())
+                ? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return employeeRepository.findByDepartmentId(departmentId, pageable).map(employeeMapper::toResponseDTO);
+    }
+
+    private Department resolveDepartment(EmployeeRequestDTO dto) {
+        if (dto.getDepartmentId() != null) {
+            return departmentRepository.findById(dto.getDepartmentId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Department not found with ID: " + dto.getDepartmentId()));
+        }
+
+        if (dto.getDepartmentCode() != null && !dto.getDepartmentCode().isBlank()) {
+            Optional<Department> deptOpt = departmentRepository.findByCode(dto.getDepartmentCode());
+            if (deptOpt.isPresent()) {
+                return deptOpt.get();
+            }
+        }
+
+        if (dto.getDepartmentName() != null && !dto.getDepartmentName().isBlank()) {
+            Optional<Department> deptOpt = departmentRepository.findByName(dto.getDepartmentName());
+            if (deptOpt.isPresent()) {
+                return deptOpt.get();
+            }
+            // Auto-create department safely if name provided
+            String code = dto.getDepartmentCode() != null && !dto.getDepartmentCode().isBlank()
+                    ? dto.getDepartmentCode()
+                    : dto.getDepartmentName().substring(0, Math.min(3, dto.getDepartmentName().length())).toUpperCase();
+            return departmentRepository.save(new Department(dto.getDepartmentName(), code, "General Office"));
+        }
+
+        throw new ResourceNotFoundException("Department specification required (departmentId, departmentCode, or departmentName)");
     }
 }

@@ -1,0 +1,1402 @@
+[
+  {
+    "name": "Shiva Naroji",
+    "email": "shiva.naroji@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Tech Lead",
+    "salary": 145000.0,
+    "joiningDate": "2020-03-15",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Rahul Verma",
+    "email": "rahul.verma@company.com",
+    "department": {
+      "code": "HR",
+      "name": "Human Resources",
+      "location": "Corporate HQ"
+    },
+    "designation": "HR Specialist",
+    "salary": 65000.0,
+    "joiningDate": "2021-06-01",
+    "city": "Hyderabad",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Anjali Sharma",
+    "email": "anjali.sharma@company.com",
+    "department": {
+      "code": "FIN",
+      "name": "Finance",
+      "location": "Corporate HQ"
+    },
+    "designation": "Financial Analyst",
+    "salary": 85000.0,
+    "joiningDate": "2019-11-10",
+    "city": "Mumbai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Priya Nair",
+    "email": "priya.nair@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Software Engineer",
+    "salary": 92000.0,
+    "joiningDate": "2022-01-20",
+    "city": "Pune",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Vikram Patel",
+    "email": "vikram.patel@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "Cloud Architect",
+    "salary": 176000.0,
+    "joiningDate": "2018-05-12",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Neha Gupta",
+    "email": "neha.gupta@company.com",
+    "department": {
+      "code": "PRD",
+      "name": "Product",
+      "location": "Corporate HQ"
+    },
+    "designation": "Product Manager",
+    "salary": 125000.0,
+    "joiningDate": "2020-08-18",
+    "city": "Delhi",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Arjun Reddy",
+    "email": "arjun.reddy@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Senior Software Engineer",
+    "salary": 110000.0,
+    "joiningDate": "2021-02-15",
+    "city": "Hyderabad",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Kavya Rao",
+    "email": "kavya.rao@company.com",
+    "department": {
+      "code": "MKT",
+      "name": "Marketing",
+      "location": "Media Center"
+    },
+    "designation": "Marketing Lead",
+    "salary": 78000.0,
+    "joiningDate": "2022-04-10",
+    "city": "Chennai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Rohan Joshi",
+    "email": "rohan.joshi@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "DevOps Engineer",
+    "salary": 98000.0,
+    "joiningDate": "2021-09-05",
+    "city": "Pune",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Sneha Kulkarni",
+    "email": "sneha.kulkarni@company.com",
+    "department": {
+      "code": "OPS",
+      "name": "Operations",
+      "location": "Logistics Hub"
+    },
+    "designation": "Operations Manager",
+    "salary": 154000.0,
+    "joiningDate": "2019-07-22",
+    "city": "Mumbai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Amit Kumar",
+    "email": "amit.kumar@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "Database Administrator",
+    "salary": 95000.0,
+    "joiningDate": "2020-01-15",
+    "city": "Noida",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Pooja Mehta",
+    "email": "pooja.mehta@company.com",
+    "department": {
+      "code": "FIN",
+      "name": "Finance",
+      "location": "Corporate HQ"
+    },
+    "designation": "Senior Accountant",
+    "salary": 76000.0,
+    "joiningDate": "2021-11-30",
+    "city": "Delhi",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Karan Bhat",
+    "email": "karan.bhat@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "QA Automation Engineer",
+    "salary": 82000.0,
+    "joiningDate": "2022-03-01",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Riya Saxena",
+    "email": "riya.saxena@company.com",
+    "department": {
+      "code": "HR",
+      "name": "Human Resources",
+      "location": "Corporate HQ"
+    },
+    "designation": "HR Recruiter",
+    "salary": 58000.0,
+    "joiningDate": "2023-01-10",
+    "city": "Hyderabad",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Aditya Singh",
+    "email": "aditya.singh@company.com",
+    "department": {
+      "code": "SAL",
+      "name": "Sales",
+      "location": "Commercial Tower"
+    },
+    "designation": "Sales Director",
+    "salary": 154000.0,
+    "joiningDate": "2018-09-14",
+    "city": "Mumbai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Divya Chowdhury",
+    "email": "divya.chowdhury@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Frontend Developer",
+    "salary": 88000.0,
+    "joiningDate": "2022-07-19",
+    "city": "Pune",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Siddharth Iyer",
+    "email": "siddharth.iyer@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Data Engineer",
+    "salary": 105000.0,
+    "joiningDate": "2021-04-25",
+    "city": "Chennai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Meera Deshmukh",
+    "email": "meera.deshmukh@company.com",
+    "department": {
+      "code": "PRD",
+      "name": "Product",
+      "location": "Corporate HQ"
+    },
+    "designation": "UX Specialist",
+    "salary": 90000.0,
+    "joiningDate": "2020-10-12",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Varun Das",
+    "email": "varun.das@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "System Engineer",
+    "salary": 72000.0,
+    "joiningDate": "2022-08-05",
+    "city": "Kolkata",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Isha Murthi",
+    "email": "isha.murthi@company.com",
+    "department": {
+      "code": "MKT",
+      "name": "Marketing",
+      "location": "Media Center"
+    },
+    "designation": "Content Strategist",
+    "salary": 68000.0,
+    "joiningDate": "2023-02-18",
+    "city": "Hyderabad",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Manish Sharma",
+    "email": "manish.sharma@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Software Engineer",
+    "salary": 85000.0,
+    "joiningDate": "2021-05-14",
+    "city": "Noida",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Swati Patel",
+    "email": "swati.patel@company.com",
+    "department": {
+      "code": "FIN",
+      "name": "Finance",
+      "location": "Corporate HQ"
+    },
+    "designation": "Financial Controller",
+    "salary": 115000.0,
+    "joiningDate": "2019-03-20",
+    "city": "Mumbai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Gaurav Verma",
+    "email": "gaurav.verma@company.com",
+    "department": {
+      "code": "SAL",
+      "name": "Sales",
+      "location": "Commercial Tower"
+    },
+    "designation": "Account Executive",
+    "salary": 75000.0,
+    "joiningDate": "2022-09-01",
+    "city": "Delhi",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Nisha Reddy",
+    "email": "nisha.reddy@company.com",
+    "department": {
+      "code": "HR",
+      "name": "Human Resources",
+      "location": "Corporate HQ"
+    },
+    "designation": "HR Business Partner",
+    "salary": 92000.0,
+    "joiningDate": "2020-04-11",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Deepak Rao",
+    "email": "deepak.rao@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Senior Tech Lead",
+    "salary": 150000.0,
+    "joiningDate": "2017-11-05",
+    "city": "Hyderabad",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Tanvi Nair",
+    "email": "tanvi.nair@company.com",
+    "department": {
+      "code": "PRD",
+      "name": "Product",
+      "location": "Corporate HQ"
+    },
+    "designation": "Associate Product Manager",
+    "salary": 80000.0,
+    "joiningDate": "2023-03-15",
+    "city": "Pune",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Abhishek Gupta",
+    "email": "abhishek.gupta@company.com",
+    "department": {
+      "code": "OPS",
+      "name": "Operations",
+      "location": "Logistics Hub"
+    },
+    "designation": "Operations Analyst",
+    "salary": 64000.0,
+    "joiningDate": "2022-11-20",
+    "city": "Chennai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Shruti Singh",
+    "email": "shruti.singh@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "QA Engineer",
+    "salary": 74000.0,
+    "joiningDate": "2021-12-01",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Nikhil Joshi",
+    "email": "nikhil.joshi@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "Cloud Security Specialist",
+    "salary": 128000.0,
+    "joiningDate": "2020-06-18",
+    "city": "Hyderabad",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Tarun Kumar",
+    "email": "tarun.kumar@company.com",
+    "department": {
+      "code": "SAL",
+      "name": "Sales",
+      "location": "Commercial Tower"
+    },
+    "designation": "Sales Manager",
+    "salary": 132000.0,
+    "joiningDate": "2019-10-28",
+    "city": "Mumbai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Ananya Iyer",
+    "email": "ananya.iyer@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Full Stack Developer",
+    "salary": 98000.0,
+    "joiningDate": "2022-02-10",
+    "city": "Chennai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Yash Deshmukh",
+    "email": "yash.deshmukh@company.com",
+    "department": {
+      "code": "MKT",
+      "name": "Marketing",
+      "location": "Media Center"
+    },
+    "designation": "SEO Specialist",
+    "salary": 62000.0,
+    "joiningDate": "2023-04-01",
+    "city": "Pune",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Kriti Chowdhury",
+    "email": "kriti.chowdhury@company.com",
+    "department": {
+      "code": "FIN",
+      "name": "Finance",
+      "location": "Corporate HQ"
+    },
+    "designation": "Tax Consultant",
+    "salary": 89000.0,
+    "joiningDate": "2020-12-05",
+    "city": "Delhi",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Harsh Kulkarni",
+    "email": "harsh.kulkarni@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Backend Engineer",
+    "salary": 92000.0,
+    "joiningDate": "2021-08-14",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Meghan Mehta",
+    "email": "meghan.mehta@company.com",
+    "department": {
+      "code": "PRD",
+      "name": "Product",
+      "location": "Corporate HQ"
+    },
+    "designation": "Product Designer",
+    "salary": 87000.0,
+    "joiningDate": "2022-05-22",
+    "city": "Mumbai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Rachna Bhat",
+    "email": "rachna.bhat@company.com",
+    "department": {
+      "code": "HR",
+      "name": "Human Resources",
+      "location": "Corporate HQ"
+    },
+    "designation": "Talent Acquisition Specialist",
+    "salary": 67000.0,
+    "joiningDate": "2021-03-30",
+    "city": "Hyderabad",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Tushar Saxena",
+    "email": "tushar.saxena@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "DevOps Engineer",
+    "salary": 104000.0,
+    "joiningDate": "2019-09-18",
+    "city": "Noida",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Bhavna Das",
+    "email": "bhavna.das@company.com",
+    "department": {
+      "code": "OPS",
+      "name": "Operations",
+      "location": "Logistics Hub"
+    },
+    "designation": "Logistics Coordinator",
+    "salary": 60000.0,
+    "joiningDate": "2022-10-10",
+    "city": "Kolkata",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Chirag Murthi",
+    "email": "chirag.murthi@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Site Reliability Engineer",
+    "salary": 118000.0,
+    "joiningDate": "2020-02-28",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Dipti Sharma",
+    "email": "dipti.sharma@company.com",
+    "department": {
+      "code": "FIN",
+      "name": "Finance",
+      "location": "Corporate HQ"
+    },
+    "designation": "Risk Analyst",
+    "salary": 82000.0,
+    "joiningDate": "2021-07-07",
+    "city": "Delhi",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Eshan Verma",
+    "email": "eshan.verma@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Mobile Developer",
+    "salary": 94000.0,
+    "joiningDate": "2022-06-12",
+    "city": "Pune",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Farhan Patel",
+    "email": "farhan.patel@company.com",
+    "department": {
+      "code": "SAL",
+      "name": "Sales",
+      "location": "Commercial Tower"
+    },
+    "designation": "Business Development Manager",
+    "salary": 132000.0,
+    "joiningDate": "2019-12-15",
+    "city": "Mumbai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Gitanjali Reddy",
+    "email": "gitanjali.reddy@company.com",
+    "department": {
+      "code": "HR",
+      "name": "Human Resources",
+      "location": "Corporate HQ"
+    },
+    "designation": "HR Manager",
+    "salary": 176000.0,
+    "joiningDate": "2018-04-20",
+    "city": "Hyderabad",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Hemant Rao",
+    "email": "hemant.rao@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "Infrastructure Lead",
+    "salary": 135000.0,
+    "joiningDate": "2019-01-08",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Indu Nair",
+    "email": "indu.nair@company.com",
+    "department": {
+      "code": "MKT",
+      "name": "Marketing",
+      "location": "Media Center"
+    },
+    "designation": "Brand Manager",
+    "salary": 88000.0,
+    "joiningDate": "2021-10-04",
+    "city": "Chennai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Jatin Gupta",
+    "email": "jatin.gupta@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Senior QA Lead",
+    "salary": 112000.0,
+    "joiningDate": "2020-05-19",
+    "city": "Noida",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Komal Singh",
+    "email": "komal.singh@company.com",
+    "department": {
+      "code": "PRD",
+      "name": "Product",
+      "location": "Corporate HQ"
+    },
+    "designation": "Senior Product Manager",
+    "salary": 138000.0,
+    "joiningDate": "2019-06-30",
+    "city": "Delhi",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Lalit Joshi",
+    "email": "lalit.joshi@company.com",
+    "department": {
+      "code": "OPS",
+      "name": "Operations",
+      "location": "Logistics Hub"
+    },
+    "designation": "Supply Chain Lead",
+    "salary": 91000.0,
+    "joiningDate": "2022-01-14",
+    "city": "Mumbai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Mansi Kumar",
+    "email": "mansi.kumar@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "System Architect",
+    "salary": 176000.0,
+    "joiningDate": "2017-08-25",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Naveen Iyer",
+    "email": "naveen.iyer@company.com",
+    "department": {
+      "code": "FIN",
+      "name": "Finance",
+      "location": "Corporate HQ"
+    },
+    "designation": "Internal Auditor",
+    "salary": 79000.0,
+    "joiningDate": "2021-01-22",
+    "city": "Chennai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Pooja Mehta",
+    "email": "pooja.mehta.eng@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "QA Engineer",
+    "salary": 78000.0,
+    "joiningDate": "2021-04-12",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Suresh Choudhary",
+    "email": "suresh.choudhary@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "Security Analyst",
+    "salary": 95000.0,
+    "joiningDate": "2020-11-05",
+    "city": "Delhi",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Divya Sen",
+    "email": "divya.sen@company.com",
+    "department": {
+      "code": "PRD",
+      "name": "Product",
+      "location": "Corporate HQ"
+    },
+    "designation": "UI/UX Designer",
+    "salary": 89000.0,
+    "joiningDate": "2022-03-18",
+    "city": "Mumbai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Tarun Saxena",
+    "email": "tarun.saxena@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Backend Engineer",
+    "salary": 105000.0,
+    "joiningDate": "2019-09-25",
+    "city": "Hyderabad",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Ritu Mishra",
+    "email": "ritu.mishra@company.com",
+    "department": {
+      "code": "HR",
+      "name": "Human Resources",
+      "location": "Corporate HQ"
+    },
+    "designation": "Talent Acquisition Lead",
+    "salary": 82000.0,
+    "joiningDate": "2021-08-14",
+    "city": "Pune",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Alok Deshmukh",
+    "email": "alok.deshmukh@company.com",
+    "department": {
+      "code": "PRD",
+      "name": "Product",
+      "location": "Corporate HQ"
+    },
+    "designation": "Business Analyst",
+    "salary": 91000.0,
+    "joiningDate": "2020-02-10",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Meera Kapoor",
+    "email": "meera.kapoor@company.com",
+    "department": {
+      "code": "MKT",
+      "name": "Marketing",
+      "location": "Media Center"
+    },
+    "designation": "Content Strategist",
+    "salary": 72000.0,
+    "joiningDate": "2022-07-01",
+    "city": "Noida",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Varun Bhatia",
+    "email": "varun.bhatia@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "Site Reliability Engineer",
+    "salary": 118000.0,
+    "joiningDate": "2019-12-03",
+    "city": "Chennai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Isha Trivedi",
+    "email": "isha.trivedi@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Data Analyst",
+    "salary": 83000.0,
+    "joiningDate": "2021-10-19",
+    "city": "Gurgaon",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Harish Pillai",
+    "email": "harish.pillai@company.com",
+    "department": {
+      "code": "FIN",
+      "name": "Finance",
+      "location": "Corporate HQ"
+    },
+    "designation": "Financial Controller",
+    "salary": 142000.0,
+    "joiningDate": "2017-05-30",
+    "city": "Mumbai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Swati Agrawal",
+    "email": "swati.agrawal@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Full Stack Developer",
+    "salary": 99000.0,
+    "joiningDate": "2021-01-15",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Yash Chopra",
+    "email": "yash.chopra@company.com",
+    "department": {
+      "code": "OPS",
+      "name": "Operations",
+      "location": "Logistics Hub"
+    },
+    "designation": "Customer Success Manager",
+    "salary": 88000.0,
+    "joiningDate": "2022-05-11",
+    "city": "Hyderabad",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Bhuvan Malik",
+    "email": "bhuvan.malik@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "Network Engineer",
+    "salary": 87000.0,
+    "joiningDate": "2020-09-08",
+    "city": "Pune",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Deepa Nambiar",
+    "email": "deepa.nambiar@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Frontend Developer",
+    "salary": 88000.0,
+    "joiningDate": "2022-02-28",
+    "city": "Trivandrum",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Gagan Deep",
+    "email": "gagan.deep@company.com",
+    "department": {
+      "code": "MKT",
+      "name": "Marketing",
+      "location": "Media Center"
+    },
+    "designation": "Sales Manager",
+    "salary": 132000.0,
+    "joiningDate": "2019-11-20",
+    "city": "Delhi",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Hema Sundaram",
+    "email": "hema.sundaram@company.com",
+    "department": {
+      "code": "LGL",
+      "name": "Legal",
+      "location": "Corporate HQ"
+    },
+    "designation": "Legal Counsel",
+    "salary": 135000.0,
+    "joiningDate": "2018-08-16",
+    "city": "Chennai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Ishaan Grover",
+    "email": "ishaan.grover@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "AI Research Engineer",
+    "salary": 165000.0,
+    "joiningDate": "2021-06-22",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Jyoti Pandey",
+    "email": "jyoti.pandey@company.com",
+    "department": {
+      "code": "FIN",
+      "name": "Finance",
+      "location": "Corporate HQ"
+    },
+    "designation": "Compliance Officer",
+    "salary": 84000.0,
+    "joiningDate": "2020-12-01",
+    "city": "Mumbai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Kiran Bhatt",
+    "email": "kiran.bhatt@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "System Administrator",
+    "salary": 75000.0,
+    "joiningDate": "2021-03-14",
+    "city": "Ahmedabad",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Latika Jain",
+    "email": "latika.jain@company.com",
+    "department": {
+      "code": "PRD",
+      "name": "Product",
+      "location": "Corporate HQ"
+    },
+    "designation": "Scrum Master",
+    "salary": 115000.0,
+    "joiningDate": "2019-10-05",
+    "city": "Pune",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Manish Roy",
+    "email": "manish.roy@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Database Administrator",
+    "salary": 96000.0,
+    "joiningDate": "2020-04-18",
+    "city": "Kolkata",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Nidhi Rastogi",
+    "email": "nidhi.rastogi@company.com",
+    "department": {
+      "code": "HR",
+      "name": "Human Resources",
+      "location": "Corporate HQ"
+    },
+    "designation": "Executive Assistant",
+    "salary": 62000.0,
+    "joiningDate": "2022-09-09",
+    "city": "Delhi",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Omkar Phadke",
+    "email": "omkar.phadke@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Mobile App Developer",
+    "salary": 94000.0,
+    "joiningDate": "2021-07-27",
+    "city": "Pune",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Payal Sinha",
+    "email": "payal.sinha@company.com",
+    "department": {
+      "code": "FIN",
+      "name": "Finance",
+      "location": "Corporate HQ"
+    },
+    "designation": "Risk Analyst",
+    "salary": 86000.0,
+    "joiningDate": "2020-06-15",
+    "city": "Mumbai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Qasim Khan",
+    "email": "qasim.khan@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "Cloud Security Engineer",
+    "salary": 122000.0,
+    "joiningDate": "2019-03-11",
+    "city": "Hyderabad",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Radhika Merchant",
+    "email": "radhika.merchant@company.com",
+    "department": {
+      "code": "MKT",
+      "name": "Marketing",
+      "location": "Media Center"
+    },
+    "designation": "Brand Specialist",
+    "salary": 79000.0,
+    "joiningDate": "2021-11-24",
+    "city": "Mumbai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Sameer Kulkarni",
+    "email": "sameer.kulkarni@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Automation Engineer",
+    "salary": 91000.0,
+    "joiningDate": "2020-08-30",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Tanvi Somani",
+    "email": "tanvi.somani@company.com",
+    "department": {
+      "code": "HR",
+      "name": "Human Resources",
+      "location": "Corporate HQ"
+    },
+    "designation": "Compensation Specialist",
+    "salary": 80000.0,
+    "joiningDate": "2021-05-17",
+    "city": "Gurgaon",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Utkarsh Tripathi",
+    "email": "utkarsh.tripathi@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Data Scientist",
+    "salary": 130000.0,
+    "joiningDate": "2019-01-08",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Vandana Hegde",
+    "email": "vandana.hegde@company.com",
+    "department": {
+      "code": "PRD",
+      "name": "Product",
+      "location": "Corporate HQ"
+    },
+    "designation": "Product Designer",
+    "salary": 97000.0,
+    "joiningDate": "2020-10-12",
+    "city": "Mangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Wasim Akram",
+    "email": "wasim.akram@company.com",
+    "department": {
+      "code": "OPS",
+      "name": "Operations",
+      "location": "Logistics Hub"
+    },
+    "designation": "Field Engineer",
+    "salary": 71000.0,
+    "joiningDate": "2022-04-03",
+    "city": "Kolkata",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Yamini Rao",
+    "email": "yamini.rao@company.com",
+    "department": {
+      "code": "MKT",
+      "name": "Marketing",
+      "location": "Media Center"
+    },
+    "designation": "SEO Specialist",
+    "salary": 68000.0,
+    "joiningDate": "2021-12-05",
+    "city": "Hyderabad",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Zeeshan Ali",
+    "email": "zeeshan.ali@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "Infrastructure Lead",
+    "salary": 148000.0,
+    "joiningDate": "2018-02-20",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Abhay Pratap",
+    "email": "abhay.pratap@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "QA Manager",
+    "salary": 154000.0,
+    "joiningDate": "2019-07-14",
+    "city": "Noida",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Bhavna Sethi",
+    "email": "bhavna.sethi@company.com",
+    "department": {
+      "code": "HR",
+      "name": "Human Resources",
+      "location": "Corporate HQ"
+    },
+    "designation": "HR Business Partner",
+    "salary": 95000.0,
+    "joiningDate": "2020-01-22",
+    "city": "Chandigarh",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Chirag Solanki",
+    "email": "chirag.solanki@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "Solutions Architect",
+    "salary": 154000.0,
+    "joiningDate": "2018-11-09",
+    "city": "Ahmedabad",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Dolly Bansal",
+    "email": "dolly.bansal@company.com",
+    "department": {
+      "code": "MKT",
+      "name": "Marketing",
+      "location": "Media Center"
+    },
+    "designation": "Copywriter",
+    "salary": 64000.0,
+    "joiningDate": "2022-08-15",
+    "city": "Jaipur",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Esha Wagh",
+    "email": "esha.wagh@company.com",
+    "department": {
+      "code": "FIN",
+      "name": "Finance",
+      "location": "Corporate HQ"
+    },
+    "designation": "Payroll Specialist",
+    "salary": 73000.0,
+    "joiningDate": "2021-09-01",
+    "city": "Pune",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Farhan Qureshi",
+    "email": "farhan.qureshi@company.com",
+    "department": {
+      "code": "CS",
+      "name": "Customer Support",
+      "location": "Support Center"
+    },
+    "designation": "Support Lead",
+    "salary": 108000.0,
+    "joiningDate": "2020-03-28",
+    "city": "Hyderabad",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Gayatri Venkat",
+    "email": "gayatri.venkat@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "Enterprise Architect",
+    "salary": 198000.0,
+    "joiningDate": "2017-04-10",
+    "city": "Chennai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Himanshu Kaushik",
+    "email": "himanshu.kaushik@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Software Developer",
+    "salary": 86000.0,
+    "joiningDate": "2022-01-05",
+    "city": "Delhi",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Indu Menon",
+    "email": "indu.menon@company.com",
+    "department": {
+      "code": "HR",
+      "name": "Human Resources",
+      "location": "Corporate HQ"
+    },
+    "designation": "Training Coordinator",
+    "salary": 69000.0,
+    "joiningDate": "2021-06-18",
+    "city": "Kochi",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Jayant Shinde",
+    "email": "jayant.shinde@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Release Engineer",
+    "salary": 98000.0,
+    "joiningDate": "2020-10-30",
+    "city": "Pune",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Kriti Mahajan",
+    "email": "kriti.mahajan@company.com",
+    "department": {
+      "code": "MKT",
+      "name": "Marketing",
+      "location": "Media Center"
+    },
+    "designation": "PR Specialist",
+    "salary": 81000.0,
+    "joiningDate": "2021-02-14",
+    "city": "Mumbai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Lokesh Verma",
+    "email": "lokesh.verma@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "Helpdesk Engineer",
+    "salary": 60000.0,
+    "joiningDate": "2022-10-20",
+    "city": "Indore",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Monica Dsouza",
+    "email": "monica.dsouza@company.com",
+    "department": {
+      "code": "MKT",
+      "name": "Marketing",
+      "location": "Media Center"
+    },
+    "designation": "Event Manager",
+    "salary": 110000.0,
+    "joiningDate": "2021-07-11",
+    "city": "Goa",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Nilesh Jadhav",
+    "email": "nilesh.jadhav@company.com",
+    "department": {
+      "code": "IT",
+      "name": "IT \u0026 Cloud",
+      "location": "Tech Hub"
+    },
+    "designation": "DevOps Architect",
+    "salary": 158000.0,
+    "joiningDate": "2018-09-04",
+    "city": "Mumbai",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Pallavi Gupte",
+    "email": "pallavi.gupte@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Data Engineer",
+    "salary": 102000.0,
+    "joiningDate": "2020-12-15",
+    "city": "Pune",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Rahul Chawla",
+    "email": "rahul.chawla@company.com",
+    "department": {
+      "code": "SAL",
+      "name": "Sales",
+      "location": "Commercial Tower"
+    },
+    "designation": "Account Executive",
+    "salary": 88000.0,
+    "joiningDate": "2021-04-29",
+    "city": "Delhi",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Sanya Malhotra",
+    "email": "sanya.malhotra@company.com",
+    "department": {
+      "code": "ENG",
+      "name": "Engineering",
+      "location": "Corporate HQ"
+    },
+    "designation": "Principal Engineer",
+    "salary": 170000.0,
+    "joiningDate": "2017-01-16",
+    "city": "Bangalore",
+    "status": "ACTIVE"
+  }
+]

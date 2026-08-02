@@ -1,6 +1,55 @@
 # 🚀 Full-Stack, Cloud & AI Engineering Interview Preparation Vault
 
-Welcome to your central master repository! All 19 interview preparation guides are organized into category subfolders inside this workspace (`c:\Users\naroj\Desktop\Siva Learning\Sprintboot-Test`).
+Welcome to your central master repository! All 34 interview preparation guides are organized into domain subfolders inside this workspace (`c:\Users\naroj\Desktop\Siva Learning\Sprintboot-Test`).
+
+---
+
+## 📂 Workspace Folder & Directory Structure
+
+```text
+c:\Users\naroj\Desktop\Siva Learning\Sprintboot-Test\
+├── 📄 index.md                         <-- Master Navigation Dashboard & Index
+├── 📁 backend/                         <-- Backend Engineering & Microservices
+│   ├── spring-boot.md
+│   ├── django.md
+│   ├── node-js.md
+│   ├── graphql.md
+│   └── microservices.md
+├── 📁 frontend/                        <-- Frontend Web & Mobile Technologies
+│   ├── react-js.md
+│   ├── react-native.md
+│   ├── next-js.md
+│   ├── redux-toolkit.md
+│   ├── tailwind.md
+│   ├── bootstrap.md
+│   ├── html.md
+│   └── css.md
+├── 📁 languages/                       <-- Core Programming Languages
+│   ├── javascript.md
+│   ├── typescript.md
+│   ├── python.md
+│   └── java.md
+├── 📁 databases/                       <-- Database Systems & In-Memory Caching
+│   ├── redis.md
+│   ├── sql.md
+│   └── mongodb.md
+├── 📁 devops-cloud/                    <-- Cloud, DevOps, Build Tools & Monorepos
+│   ├── eslint.md
+│   ├── monorepo.md
+│   ├── azure.md
+│   ├── esbuild.md
+│   ├── sonar.md
+│   ├── webpack.md
+│   ├── babel.md
+│   ├── npm.md
+│   ├── git.md
+│   ├── CI-CD.md
+│   └── jenkins.md
+└── 📁 ai/                              <-- Artificial Intelligence & LLMs
+    ├── generative-ai.md
+    ├── github-copilot.md
+    └── agent-ai.md
+```
 
 ---
 
