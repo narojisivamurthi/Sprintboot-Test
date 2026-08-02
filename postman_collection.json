@@ -1,0 +1,430 @@
+{
+	"info": {
+		"_postman_id": "e8f7a1b2-3c4d-4e5f-a6b7-8c9d0e1f2a3b",
+		"name": "Employee Management API",
+		"description": "Postman Collection for testing Departments, Designations, Cities, Statuses, and Employees endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Departments",
+			"item": [
+				{
+					"name": "Get All Departments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/departments",
+							"host": ["{{base_url}}"],
+							"path": ["departments"]
+						}
+					}
+				},
+				{
+					"name": "Get Department By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/departments/1",
+							"host": ["{{base_url}}"],
+							"path": ["departments", "1"]
+						}
+					}
+				},
+				{
+					"name": "Get Department With Employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/departments/1/employees",
+							"host": ["{{base_url}}"],
+							"path": ["departments", "1", "employees"]
+						}
+					}
+				},
+				{
+					"name": "Create Department",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Artificial Intelligence\",\n  \"code\": \"AI\",\n  \"location\": \"Innovation Lab\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/departments",
+							"host": ["{{base_url}}"],
+							"path": ["departments"]
+						}
+					}
+				},
+				{
+					"name": "Update Department",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Artificial Intelligence & ML\",\n  \"code\": \"AIML\",\n  \"location\": \"Innovation Lab - Block B\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/departments/1",
+							"host": ["{{base_url}}"],
+							"path": ["departments", "1"]
+						}
+					}
+				},
+				{
+					"name": "Delete Department",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/departments/1",
+							"host": ["{{base_url}}"],
+							"path": ["departments", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Designations",
+			"item": [
+				{
+					"name": "Get All Designations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/designations",
+							"host": ["{{base_url}}"],
+							"path": ["designations"]
+						}
+					}
+				},
+				{
+					"name": "Get Designation By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/designations/1",
+							"host": ["{{base_url}}"],
+							"path": ["designations", "1"]
+						}
+					}
+				},
+				{
+					"name": "Create Designation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Principal AI Architect\",\n  \"code\": \"PAIA\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/designations",
+							"host": ["{{base_url}}"],
+							"path": ["designations"]
+						}
+					}
+				},
+				{
+					"name": "Update Designation",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Chief AI Architect\",\n  \"code\": \"CAIA\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/designations/1",
+							"host": ["{{base_url}}"],
+							"path": ["designations", "1"]
+						}
+					}
+				},
+				{
+					"name": "Delete Designation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/designations/1",
+							"host": ["{{base_url}}"],
+							"path": ["designations", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Cities",
+			"item": [
+				{
+					"name": "Get All Cities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cities",
+							"host": ["{{base_url}}"],
+							"path": ["cities"]
+						}
+					}
+				},
+				{
+					"name": "Get City By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cities/1",
+							"host": ["{{base_url}}"],
+							"path": ["cities", "1"]
+						}
+					}
+				},
+				{
+					"name": "Create City",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Seattle\",\n  \"state\": \"WA\",\n  \"country\": \"USA\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/cities",
+							"host": ["{{base_url}}"],
+							"path": ["cities"]
+						}
+					}
+				},
+				{
+					"name": "Update City",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Seattle HQ\",\n  \"state\": \"Washington\",\n  \"country\": \"USA\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/cities/1",
+							"host": ["{{base_url}}"],
+							"path": ["cities", "1"]
+						}
+					}
+				},
+				{
+					"name": "Delete City",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cities/1",
+							"host": ["{{base_url}}"],
+							"path": ["cities", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Statuses",
+			"item": [
+				{
+					"name": "Get All Employee Statuses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/statuses",
+							"host": ["{{base_url}}"],
+							"path": ["statuses"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "Get Employees (Paginated)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employees?page=0&size=10&sortBy=id&sortDir=asc",
+							"host": ["{{base_url}}"],
+							"path": ["employees"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "sortBy",
+									"value": "id"
+								},
+								{
+									"key": "sortDir",
+									"value": "asc"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Employees (Unpaginated)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employees/all",
+							"host": ["{{base_url}}"],
+							"path": ["employees", "all"]
+						}
+					}
+				},
+				{
+					"name": "Get Employee By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employees/1",
+							"host": ["{{base_url}}"],
+							"path": ["employees", "1"]
+						}
+					}
+				},
+				{
+					"name": "Get Employees By Department ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employees/department/1?page=0&size=10",
+							"host": ["{{base_url}}"],
+							"path": ["employees", "department", "1"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Employee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Siva Naroji\",\n  \"email\": \"siva.naroji@example.com\",\n  \"departmentName\": \"Engineering\",\n  \"designationTitle\": \"Tech Lead\",\n  \"salary\": 145000.0,\n  \"joiningDate\": \"2021-06-01\",\n  \"cityName\": \"Seattle\",\n  \"status\": \"ACTIVE\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/employees",
+							"host": ["{{base_url}}"],
+							"path": ["employees"]
+						}
+					}
+				},
+				{
+					"name": "Update Employee",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Siva Naroji\",\n  \"email\": \"siva.naroji@example.com\",\n  \"departmentName\": \"Engineering\",\n  \"designationTitle\": \"Senior Tech Lead\",\n  \"salary\": 160000.0,\n  \"joiningDate\": \"2021-06-01\",\n  \"cityName\": \"Seattle HQ\",\n  \"status\": \"ACTIVE\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/employees/1",
+							"host": ["{{base_url}}"],
+							"path": ["employees", "1"]
+						}
+					}
+				},
+				{
+					"name": "Delete Employee",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/employees/1",
+							"host": ["{{base_url}}"],
+							"path": ["employees", "1"]
+						}
+					}
+				}
+			]
+		}
+	]
+}

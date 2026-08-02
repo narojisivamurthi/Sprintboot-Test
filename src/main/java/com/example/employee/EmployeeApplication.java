@@ -1,8 +1,13 @@
 package com.example.employee;
 
+import com.example.employee.entity.City;
 import com.example.employee.entity.Department;
+import com.example.employee.entity.Designation;
 import com.example.employee.entity.Employee;
+import com.example.employee.entity.EmployeeStatus;
+import com.example.employee.repository.CityRepository;
 import com.example.employee.repository.DepartmentRepository;
+import com.example.employee.repository.DesignationRepository;
 import com.example.employee.repository.EmployeeRepository;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -45,11 +50,11 @@ public class EmployeeApplication {
         public static DepartmentJsonInput fromValue(Object value) {
             if (value instanceof Map<?, ?> map) {
                 String name = map.containsKey("name") && map.get("name") != null ? map.get("name").toString() : "";
-                String code = map.containsKey("code") && map.get("code") != null ? map.get("code").toString() : generateDeptCode(name);
+                String code = map.containsKey("code") && map.get("code") != null ? map.get("code").toString() : generateCode(name);
                 String location = map.containsKey("location") && map.get("location") != null ? map.get("location").toString() : "Corporate HQ";
                 return new DepartmentJsonInput(name, code, location);
             } else if (value instanceof String str) {
-                return new DepartmentJsonInput(str, generateDeptCode(str), "Corporate HQ");
+                return new DepartmentJsonInput(str, generateCode(str), "Corporate HQ");
             }
             return null;
         }
@@ -68,7 +73,10 @@ public class EmployeeApplication {
     }
 
     @Bean
-    public CommandLineRunner initData(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository) {
+    public CommandLineRunner initData(EmployeeRepository employeeRepository,
+                                       DepartmentRepository departmentRepository,
+                                       DesignationRepository designationRepository,
+                                       CityRepository cityRepository) {
         return args -> {
             if (employeeRepository.count() > 0) {
                 System.out.println("ℹ️ Database already contains " + employeeRepository.count() + " employee records. Skipping initial seeding.");
@@ -86,35 +94,70 @@ public class EmployeeApplication {
                         List<EmployeeJsonInput> rawEmployees = objectMapper.readValue(inputStream, typeReference);
                         
                         Map<String, Department> departmentMap = new HashMap<>();
+                        Map<String, Designation> designationMap = new HashMap<>();
+                        Map<String, City> cityMap = new HashMap<>();
 
                         for (EmployeeJsonInput raw : rawEmployees) {
+                            // Seed Departments
                             DepartmentJsonInput deptJson = raw.getDepartment();
                             if (deptJson != null && !departmentMap.containsKey(deptJson.getCode())) {
                                 Department dept = departmentRepository.findByCode(deptJson.getCode())
                                         .orElseGet(() -> departmentRepository.save(new Department(deptJson.getName(), deptJson.getCode(), deptJson.getLocation())));
                                 departmentMap.put(deptJson.getCode(), dept);
                             }
+
+                            // Seed Designations with unique code handling
+                            if (raw.getDesignation() != null && !raw.getDesignation().isBlank() && !designationMap.containsKey(raw.getDesignation().trim())) {
+                                String desigTitle = raw.getDesignation().trim();
+                                Designation desig = designationRepository.findByTitle(desigTitle)
+                                        .orElseGet(() -> {
+                                            String code = generateUniqueDesignationCode(desigTitle, designationMap, designationRepository);
+                                            return designationRepository.save(new Designation(desigTitle, code));
+                                        });
+                                designationMap.put(desigTitle, desig);
+                            }
+
+                            // Seed Cities
+                            if (raw.getCity() != null && !raw.getCity().isBlank() && !cityMap.containsKey(raw.getCity().trim())) {
+                                String cityName = raw.getCity().trim();
+                                City city = cityRepository.findByName(cityName)
+                                        .orElseGet(() -> cityRepository.save(new City(cityName, "N/A", "USA")));
+                                cityMap.put(cityName, city);
+                            }
                         }
 
                         List<Employee> employeesToSave = new ArrayList<>();
                         for (EmployeeJsonInput raw : rawEmployees) {
                             Department dept = raw.getDepartment() != null ? departmentMap.get(raw.getDepartment().getCode()) : null;
+                            Designation desig = raw.getDesignation() != null ? designationMap.get(raw.getDesignation().trim()) : null;
+                            City city = raw.getCity() != null ? cityMap.get(raw.getCity().trim()) : null;
+                            
+                            EmployeeStatus status = EmployeeStatus.ACTIVE;
+                            if (raw.getStatus() != null) {
+                                try {
+                                    status = EmployeeStatus.valueOf(raw.getStatus().trim().toUpperCase());
+                                } catch (IllegalArgumentException ignored) {}
+                            }
+
                             Employee emp = new Employee(
                                     raw.getName(),
                                     raw.getEmail(),
                                     dept,
-                                    raw.getDesignation(),
+                                    desig,
                                     raw.getSalary(),
                                     raw.getJoiningDate(),
-                                    raw.getCity(),
-                                    raw.getStatus()
+                                    city,
+                                    status
                             );
                             employeesToSave.add(emp);
                         }
 
                         if (!employeesToSave.isEmpty()) {
                             employeeRepository.saveAll(employeesToSave);
-                            System.out.println("✅ Successfully initialized " + departmentMap.size() + " departments and " + employeesToSave.size() + " employee records from employees.json into database!");
+                            System.out.println("✅ Successfully initialized " + departmentMap.size() + " departments, " 
+                                    + designationMap.size() + " designations, " 
+                                    + cityMap.size() + " cities, and " 
+                                    + employeesToSave.size() + " employee records from employees.json into database!");
                         }
                     } else {
                         System.err.println("❌ Could not find employees.json in resources directory!");
@@ -126,11 +169,31 @@ public class EmployeeApplication {
         };
     }
 
-    private static String generateDeptCode(String deptName) {
-        if (deptName == null || deptName.trim().isEmpty()) return "GEN";
-        String[] words = deptName.split("\\s+");
+    private static String generateUniqueDesignationCode(String desigTitle, Map<String, Designation> designationMap, DesignationRepository designationRepository) {
+        String baseCode = generateCode(desigTitle);
+        String code = baseCode;
+        int counter = 1;
+        while (isCodeTaken(code, designationMap, designationRepository)) {
+            code = baseCode + "-" + counter;
+            counter++;
+        }
+        return code;
+    }
+
+    private static boolean isCodeTaken(String code, Map<String, Designation> designationMap, DesignationRepository designationRepository) {
+        for (Designation d : designationMap.values()) {
+            if (d.getCode().equalsIgnoreCase(code)) {
+                return true;
+            }
+        }
+        return designationRepository.existsByCode(code);
+    }
+
+    private static String generateCode(String name) {
+        if (name == null || name.trim().isEmpty()) return "GEN";
+        String[] words = name.split("\\s+");
         if (words.length == 1) {
-            return deptName.substring(0, Math.min(3, deptName.length())).toUpperCase();
+            return name.substring(0, Math.min(3, name.length())).toUpperCase();
         }
         StringBuilder sb = new StringBuilder();
         for (String w : words) {

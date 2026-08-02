@@ -1,6 +1,7 @@
 package com.example.employee;
 
 import com.example.employee.dto.EmployeeRequestDTO;
+import com.example.employee.entity.EmployeeStatus;
 import com.example.employee.service.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -49,7 +50,9 @@ class DemoApplicationTests {
         assertEquals(1L, dto.getDepartmentId());
         assertEquals("Engineering", dto.getDepartmentName());
         assertEquals("ENG", dto.getDepartmentCode());
+        assertEquals("Tech Lead", dto.getDesignationTitle());
         assertEquals("Shiva Naroji", dto.getName());
+        assertEquals(EmployeeStatus.ACTIVE, dto.getStatus());
     }
 
     @Test
@@ -58,11 +61,11 @@ class DemoApplicationTests {
                 .name("Low Pay Test")
                 .email("lowpay.test@company.com")
                 .departmentName("Engineering")
-                .designation("Senior Software Lead")
+                .designationTitle("Senior Software Lead")
                 .salary(10000.0) // Low salary ($10k)
                 .joiningDate(LocalDate.of(2018, 1, 1)) // ~8 years exp -> minimum required is 8 * 18,000 = $144,000
-                .city("Bangalore")
-                .status("ACTIVE")
+                .cityName("Bangalore")
+                .status(EmployeeStatus.ACTIVE)
                 .build();
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {

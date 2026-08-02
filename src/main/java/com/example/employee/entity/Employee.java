@@ -2,6 +2,8 @@ package com.example.employee.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -47,19 +49,28 @@ public class Employee {
     @EqualsAndHashCode.Exclude
     private Department department;
 
-    @NotBlank(message = "Designation is required")
-    private String designation;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "designation_id")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Designation designation;
 
     @Positive(message = "Salary must be greater than zero")
     private double salary;
 
     private LocalDate joiningDate;
 
-    private String city;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private City city;
 
-    private String status; // ACTIVE, INACTIVE, ON_LEAVE
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private EmployeeStatus status;
 
-    public Employee(String name, String email, Department department, String designation, double salary, LocalDate joiningDate, String city, String status) {
+    public Employee(String name, String email, Department department, Designation designation, double salary, LocalDate joiningDate, City city, EmployeeStatus status) {
         this.name = name;
         this.email = email;
         this.department = department;

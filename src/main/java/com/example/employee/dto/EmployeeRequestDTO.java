@@ -1,5 +1,6 @@
 package com.example.employee.dto;
 
+import com.example.employee.entity.EmployeeStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -32,17 +33,21 @@ public class EmployeeRequestDTO {
     private String departmentCode;
     private String departmentName;
 
-    @NotBlank(message = "Designation is required")
-    private String designation;
+    // Provide designationId OR designationTitle OR designationCode OR nested "designation" object
+    private Long designationId;
+    private String designationTitle;
+    private String designationCode;
 
     @Positive(message = "Salary must be greater than zero")
     private double salary;
 
     private LocalDate joiningDate;
 
-    private String city;
+    // Provide cityId OR cityName OR nested "city" object
+    private Long cityId;
+    private String cityName;
 
-    private String status; // ACTIVE, INACTIVE, ON_LEAVE
+    private EmployeeStatus status; // ACTIVE, INACTIVE, ON_LEAVE
 
     @JsonProperty("department")
     public void setDepartment(Object department) {
@@ -62,6 +67,45 @@ public class EmployeeRequestDTO {
             this.departmentName = str;
         } else if (department instanceof Number num) {
             this.departmentId = num.longValue();
+        }
+    }
+
+    @JsonProperty("designation")
+    public void setDesignation(Object designation) {
+        if (designation instanceof Map<?, ?> map) {
+            if (map.containsKey("id") && map.get("id") != null) {
+                try {
+                    this.designationId = Long.valueOf(map.get("id").toString());
+                } catch (NumberFormatException ignored) {}
+            }
+            if (map.containsKey("code") && map.get("code") != null) {
+                this.designationCode = map.get("code").toString();
+            }
+            if (map.containsKey("title") && map.get("title") != null) {
+                this.designationTitle = map.get("title").toString();
+            }
+        } else if (designation instanceof String str) {
+            this.designationTitle = str;
+        } else if (designation instanceof Number num) {
+            this.designationId = num.longValue();
+        }
+    }
+
+    @JsonProperty("city")
+    public void setCity(Object city) {
+        if (city instanceof Map<?, ?> map) {
+            if (map.containsKey("id") && map.get("id") != null) {
+                try {
+                    this.cityId = Long.valueOf(map.get("id").toString());
+                } catch (NumberFormatException ignored) {}
+            }
+            if (map.containsKey("name") && map.get("name") != null) {
+                this.cityName = map.get("name").toString();
+            }
+        } else if (city instanceof String str) {
+            this.cityName = str;
+        } else if (city instanceof Number num) {
+            this.cityId = num.longValue();
         }
     }
 }

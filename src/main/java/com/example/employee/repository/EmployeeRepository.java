@@ -13,26 +13,26 @@ import java.util.Optional;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
-    @EntityGraph(attributePaths = {"department"})
+    @EntityGraph(attributePaths = {"department", "designation", "city"})
     Optional<Employee> findByEmail(String email);
 
     boolean existsByEmail(String email);
 
-    @EntityGraph(attributePaths = {"department"})
+    @EntityGraph(attributePaths = {"department", "designation", "city"})
     List<Employee> findByDepartmentId(Long departmentId);
 
-    @EntityGraph(attributePaths = {"department"})
+    @EntityGraph(attributePaths = {"department", "designation", "city"})
     Page<Employee> findByDepartmentId(Long departmentId, Pageable pageable);
 
     @Override
-    @EntityGraph(attributePaths = {"department"})
+    @EntityGraph(attributePaths = {"department", "designation", "city"})
     List<Employee> findAll();
 
     @Override
-    @EntityGraph(attributePaths = {"department"})
+    @EntityGraph(attributePaths = {"department", "designation", "city"})
     Page<Employee> findAll(Pageable pageable);
 
     @Override
-    @EntityGraph(attributePaths = {"department"})
+    @EntityGraph(attributePaths = {"department", "designation", "city"})
     Optional<Employee> findById(Long id);
 }

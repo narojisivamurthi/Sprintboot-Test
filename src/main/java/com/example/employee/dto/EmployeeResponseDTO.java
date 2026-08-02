@@ -1,5 +1,6 @@
 package com.example.employee.dto;
 
+import com.example.employee.entity.EmployeeStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,9 +18,9 @@ public class EmployeeResponseDTO {
     private String name;
     private String email;
     private DepartmentResponseDTO department;
-    private String designation;
+    private DesignationResponseDTO designation;
     private double salary;
     private LocalDate joiningDate;
-    private String city;
-    private String status;
+    private CityResponseDTO city;
+    private EmployeeStatus status;
 }

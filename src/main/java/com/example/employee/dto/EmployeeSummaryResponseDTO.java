@@ -1,5 +1,6 @@
 package com.example.employee.dto;
 
+import com.example.employee.entity.EmployeeStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,5 +21,5 @@ public class EmployeeSummaryResponseDTO {
     private double salary;
     private LocalDate joiningDate;
     private String city;
-    private String status;
+    private EmployeeStatus status;
 }
