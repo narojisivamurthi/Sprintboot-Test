@@ -1,0 +1,14 @@
+# Node dependencies
+node_modules/
+.pnpm-store/
+
+# Vite build output
+dist/
+dist-ssr/
+*.local
+
+# Editor & Logs
+.vscode/
+.idea/
+*.log
+.DS_Store

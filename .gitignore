@@ -24,10 +24,17 @@ target/
 /nbbuild/
 /dist/
 /nbdist/
-/.nb-gradle/
+/+.nb-gradle/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
+
+### Node / Frontend ###
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+*.log
