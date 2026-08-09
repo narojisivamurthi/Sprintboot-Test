@@ -6,6 +6,7 @@ import com.example.employee.service.CityService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,11 +46,12 @@ public class CityController {
 
     @PutMapping("/{id}")
     public ResponseEntity<CityResponseDTO> updateCity(@PathVariable Long id,
-                                                      @Valid @RequestBody CityRequestDTO dto) {
+            @Valid @RequestBody CityRequestDTO dto) {
         return ResponseEntity.ok(cityService.updateCity(id, dto));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteCity(@PathVariable Long id) {
         cityService.deleteCity(id);
         return ResponseEntity.ok("City deleted successfully with ID: " + id);

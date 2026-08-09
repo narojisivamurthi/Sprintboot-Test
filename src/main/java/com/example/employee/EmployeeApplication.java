@@ -76,8 +76,32 @@ public class EmployeeApplication {
     public CommandLineRunner initData(EmployeeRepository employeeRepository,
                                        DepartmentRepository departmentRepository,
                                        DesignationRepository designationRepository,
-                                       CityRepository cityRepository) {
+                                       CityRepository cityRepository,
+                                       com.example.employee.repository.UserRepository userRepository,
+                                       org.springframework.security.crypto.password.PasswordEncoder passwordEncoder) {
         return args -> {
+            // Seed default users if empty
+            if (!userRepository.existsByUsername("admin")) {
+                com.example.employee.entity.User admin = new com.example.employee.entity.User(
+                        "admin",
+                        "admin@example.com",
+                        passwordEncoder.encode("admin123"),
+                        com.example.employee.entity.Role.ROLE_ADMIN
+                );
+                userRepository.save(admin);
+                System.out.println("✅ Default admin user created (admin / admin123)");
+            }
+            if (!userRepository.existsByUsername("user")) {
+                com.example.employee.entity.User user = new com.example.employee.entity.User(
+                        "user",
+                        "user@example.com",
+                        passwordEncoder.encode("user123"),
+                        com.example.employee.entity.Role.ROLE_USER
+                );
+                userRepository.save(user);
+                System.out.println("✅ Default standard user created (user / user123)");
+            }
+
             if (employeeRepository.count() > 0) {
                 System.out.println("ℹ️ Database already contains " + employeeRepository.count() + " employee records. Skipping initial seeding.");
                 return;

@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "e8f7a1b2-3c4d-4e5f-a6b7-8c9d0e1f2a3b",
 		"name": "Employee Management API",
-		"description": "Postman Collection for testing Departments, Designations, Cities, Statuses, and Employees endpoints.",
+		"description": "Postman Collection for testing Authentication, Departments, Designations, Cities, Statuses, and Employees endpoints.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"variable": [
@@ -10,9 +10,181 @@
 			"key": "base_url",
 			"value": "http://localhost:8080",
 			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
 		}
 	],
 	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login (Admin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData && jsonData.accessToken) {",
+									"    pm.collectionVariables.set(\"token\", jsonData.accessToken);",
+									"    console.log(\"JWT Token auto-saved to collection variable 'token':\", jsonData.accessToken);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"usernameOrEmail\": \"admin\",\n  \"password\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					}
+				},
+				{
+					"name": "Login (User)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData && jsonData.accessToken) {",
+									"    pm.collectionVariables.set(\"token\", jsonData.accessToken);",
+									"    console.log(\"JWT Token auto-saved to collection variable 'token':\", jsonData.accessToken);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"usernameOrEmail\": \"user\",\n  \"password\": \"user123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					}
+				},
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"johndoe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Current User (Me)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/auth/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/auth/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"users"
+							]
+						}
+					}
+				}
+			]
+		},
 		{
 			"name": "Departments",
 			"item": [
@@ -20,11 +192,21 @@
 					"name": "Get All Departments",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/departments",
-							"host": ["{{base_url}}"],
-							"path": ["departments"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"departments"
+							]
 						}
 					}
 				},
@@ -32,11 +214,22 @@
 					"name": "Get Department By ID",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/departments/1",
-							"host": ["{{base_url}}"],
-							"path": ["departments", "1"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"departments",
+								"1"
+							]
 						}
 					}
 				},
@@ -44,11 +237,23 @@
 					"name": "Get Department With Employees",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/departments/1/employees",
-							"host": ["{{base_url}}"],
-							"path": ["departments", "1", "employees"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"departments",
+								"1",
+								"employees"
+							]
 						}
 					}
 				},
@@ -59,7 +264,13 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -68,8 +279,12 @@
 						},
 						"url": {
 							"raw": "{{base_url}}/departments",
-							"host": ["{{base_url}}"],
-							"path": ["departments"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"departments"
+							]
 						}
 					}
 				},
@@ -80,7 +295,13 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -89,8 +310,13 @@
 						},
 						"url": {
 							"raw": "{{base_url}}/departments/1",
-							"host": ["{{base_url}}"],
-							"path": ["departments", "1"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"departments",
+								"1"
+							]
 						}
 					}
 				},
@@ -98,11 +324,22 @@
 					"name": "Delete Department",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/departments/1",
-							"host": ["{{base_url}}"],
-							"path": ["departments", "1"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"departments",
+								"1"
+							]
 						}
 					}
 				}
@@ -115,11 +352,21 @@
 					"name": "Get All Designations",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/designations",
-							"host": ["{{base_url}}"],
-							"path": ["designations"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"designations"
+							]
 						}
 					}
 				},
@@ -127,11 +374,22 @@
 					"name": "Get Designation By ID",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/designations/1",
-							"host": ["{{base_url}}"],
-							"path": ["designations", "1"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"designations",
+								"1"
+							]
 						}
 					}
 				},
@@ -142,7 +400,13 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -151,8 +415,12 @@
 						},
 						"url": {
 							"raw": "{{base_url}}/designations",
-							"host": ["{{base_url}}"],
-							"path": ["designations"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"designations"
+							]
 						}
 					}
 				},
@@ -163,7 +431,13 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -172,8 +446,13 @@
 						},
 						"url": {
 							"raw": "{{base_url}}/designations/1",
-							"host": ["{{base_url}}"],
-							"path": ["designations", "1"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"designations",
+								"1"
+							]
 						}
 					}
 				},
@@ -181,11 +460,22 @@
 					"name": "Delete Designation",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/designations/1",
-							"host": ["{{base_url}}"],
-							"path": ["designations", "1"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"designations",
+								"1"
+							]
 						}
 					}
 				}
@@ -198,11 +488,21 @@
 					"name": "Get All Cities",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/cities",
-							"host": ["{{base_url}}"],
-							"path": ["cities"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cities"
+							]
 						}
 					}
 				},
@@ -210,11 +510,22 @@
 					"name": "Get City By ID",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/cities/1",
-							"host": ["{{base_url}}"],
-							"path": ["cities", "1"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cities",
+								"1"
+							]
 						}
 					}
 				},
@@ -225,7 +536,13 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -234,8 +551,12 @@
 						},
 						"url": {
 							"raw": "{{base_url}}/cities",
-							"host": ["{{base_url}}"],
-							"path": ["cities"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cities"
+							]
 						}
 					}
 				},
@@ -246,7 +567,13 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -255,8 +582,13 @@
 						},
 						"url": {
 							"raw": "{{base_url}}/cities/1",
-							"host": ["{{base_url}}"],
-							"path": ["cities", "1"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cities",
+								"1"
+							]
 						}
 					}
 				},
@@ -264,11 +596,22 @@
 					"name": "Delete City",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/cities/1",
-							"host": ["{{base_url}}"],
-							"path": ["cities", "1"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cities",
+								"1"
+							]
 						}
 					}
 				}
@@ -281,11 +624,21 @@
 					"name": "Get All Employee Statuses",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/statuses",
-							"host": ["{{base_url}}"],
-							"path": ["statuses"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"statuses"
+							]
 						}
 					}
 				}
@@ -298,11 +651,21 @@
 					"name": "Get Employees (Paginated)",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/employees?page=0&size=10&sortBy=id&sortDir=asc",
-							"host": ["{{base_url}}"],
-							"path": ["employees"],
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees"
+							],
 							"query": [
 								{
 									"key": "page",
@@ -328,11 +691,22 @@
 					"name": "Get All Employees (Unpaginated)",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/employees/all",
-							"host": ["{{base_url}}"],
-							"path": ["employees", "all"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								"all"
+							]
 						}
 					}
 				},
@@ -340,11 +714,22 @@
 					"name": "Get Employee By ID",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/employees/1",
-							"host": ["{{base_url}}"],
-							"path": ["employees", "1"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								"1"
+							]
 						}
 					}
 				},
@@ -352,11 +737,23 @@
 					"name": "Get Employees By Department ID",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/employees/department/1?page=0&size=10",
-							"host": ["{{base_url}}"],
-							"path": ["employees", "department", "1"],
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								"department",
+								"1"
+							],
 							"query": [
 								{
 									"key": "page",
@@ -377,7 +774,13 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -386,8 +789,12 @@
 						},
 						"url": {
 							"raw": "{{base_url}}/employees",
-							"host": ["{{base_url}}"],
-							"path": ["employees"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees"
+							]
 						}
 					}
 				},
@@ -398,7 +805,13 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -407,8 +820,13 @@
 						},
 						"url": {
 							"raw": "{{base_url}}/employees/1",
-							"host": ["{{base_url}}"],
-							"path": ["employees", "1"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								"1"
+							]
 						}
 					}
 				},
@@ -416,11 +834,22 @@
 					"name": "Delete Employee",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/employees/1",
-							"host": ["{{base_url}}"],
-							"path": ["employees", "1"]
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"employees",
+								"1"
+							]
 						}
 					}
 				}

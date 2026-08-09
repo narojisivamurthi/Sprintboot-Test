@@ -2,16 +2,31 @@ const BASE_URL = '/api'; // Proxied to http://localhost:8080 in dev
 
 async function request(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`;
+  
+  const headers = {
+    'Content-Type': 'application/json',
+    ...options.headers,
+  };
+
+  const token = localStorage.getItem('token');
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
   const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
     ...options,
+    headers,
   };
 
   try {
     const response = await fetch(url, config);
+    
+    if (response.status === 401 && !endpoint.startsWith('/auth/')) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.dispatchEvent(new Event('auth:unauthorized'));
+    }
+
     if (!response.ok) {
       const errorText = await response.text();
       let errorMessage = `HTTP Error ${response.status}`;
@@ -41,6 +56,12 @@ async function request(endpoint, options = {}) {
 }
 
 export const api = {
+  // Auth
+  login: (credentials) => request('/auth/login', { method: 'POST', body: JSON.stringify(credentials) }),
+  register: (userData) => request('/auth/register', { method: 'POST', body: JSON.stringify(userData) }),
+  getCurrentUser: () => request('/auth/me'),
+  getUsers: () => request('/users'),
+
   // Employees
   getEmployees: (page = 0, size = 10, sortBy = 'id', sortDir = 'asc') =>
     request(`/employees?page=${page}&size=${size}&sortBy=${sortBy}&sortDir=${sortDir}`),
