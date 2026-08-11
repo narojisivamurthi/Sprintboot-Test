@@ -43,7 +43,7 @@ class DesignationServiceTest {
     @BeforeEach
     void setUp() {
         designation = new Designation("Senior Software Engineer", "SSE");
-        designation.setId(1L);
+        designation.setId("1");
 
         requestDTO = DesignationRequestDTO.builder()
                 .title("Senior Software Engineer")
@@ -51,7 +51,7 @@ class DesignationServiceTest {
                 .build();
 
         responseDTO = DesignationResponseDTO.builder()
-                .id(1L)
+                .id("1")
                 .title("Senior Software Engineer")
                 .code("SSE")
                 .build();
@@ -72,21 +72,21 @@ class DesignationServiceTest {
     @Test
     @DisplayName("getDesignationById should return DesignationResponseDTO when exists")
     void getDesignationById_Success_ShouldReturnDesignation() {
-        when(designationRepository.findById(1L)).thenReturn(Optional.of(designation));
+        when(designationRepository.findById("1")).thenReturn(Optional.of(designation));
         when(designationMapper.toResponseDTO(designation)).thenReturn(responseDTO);
 
-        DesignationResponseDTO result = designationService.getDesignationById(1L);
+        DesignationResponseDTO result = designationService.getDesignationById("1");
 
         assertThat(result).isNotNull();
-        assertThat(result.getId()).isEqualTo(1L);
+        assertThat(result.getId()).isEqualTo("1");
     }
 
     @Test
     @DisplayName("getDesignationById should throw ResourceNotFoundException when not found")
     void getDesignationById_NotFound_ShouldThrowException() {
-        when(designationRepository.findById(99L)).thenReturn(Optional.empty());
+        when(designationRepository.findById("99")).thenReturn(Optional.empty());
 
-        assertThrows(ResourceNotFoundException.class, () -> designationService.getDesignationById(99L));
+        assertThrows(ResourceNotFoundException.class, () -> designationService.getDesignationById("99"));
     }
 
     @Test
@@ -113,8 +113,8 @@ class DesignationServiceTest {
                 .build();
 
         Designation autoDesig = new Designation("Tech Lead", "TL");
-        autoDesig.setId(2L);
-        DesignationResponseDTO autoResp = DesignationResponseDTO.builder().id(2L).title("Tech Lead").code("TL").build();
+        autoDesig.setId("2");
+        DesignationResponseDTO autoResp = DesignationResponseDTO.builder().id("2").title("Tech Lead").code("TL").build();
 
         when(designationRepository.existsByTitle("Tech Lead")).thenReturn(false);
         when(designationRepository.existsByCode("TL")).thenReturn(false);
@@ -140,11 +140,12 @@ class DesignationServiceTest {
     @Test
     @DisplayName("deleteDesignation should delete designation when found")
     void deleteDesignation_Success_ShouldDelete() {
-        when(designationRepository.findById(1L)).thenReturn(Optional.of(designation));
+        when(designationRepository.findById("1")).thenReturn(Optional.of(designation));
         doNothing().when(designationRepository).delete(designation);
 
-        designationService.deleteDesignation(1L);
+        designationService.deleteDesignation("1");
 
         verify(designationRepository, times(1)).delete(designation);
     }
 }
+

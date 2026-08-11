@@ -18,7 +18,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -47,14 +46,12 @@ public class EmployeeService {
         this.employeeMapper = employeeMapper;
     }
 
-    @Transactional(readOnly = true)
     public List<EmployeeResponseDTO> getAllEmployees() {
         return employeeRepository.findAll().stream()
                 .map(employeeMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
     public Page<EmployeeResponseDTO> getEmployeesPaginated(int page, int size, String sortBy, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())
                 ? Sort.by(sortBy).ascending()
@@ -63,14 +60,12 @@ public class EmployeeService {
         return employeeRepository.findAll(pageable).map(employeeMapper::toResponseDTO);
     }
 
-    @Transactional(readOnly = true)
-    public EmployeeResponseDTO getEmployeeById(Long id) {
+    public EmployeeResponseDTO getEmployeeById(String id) {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with ID: " + id));
         return employeeMapper.toResponseDTO(employee);
     }
 
-    @Transactional
     public EmployeeResponseDTO createEmployee(EmployeeRequestDTO dto) {
         if (dto.getEmail() != null && employeeRepository.existsByEmail(dto.getEmail())) {
             throw new DuplicateResourceException("Employee already exists with email: " + dto.getEmail());
@@ -85,8 +80,7 @@ public class EmployeeService {
         return employeeMapper.toResponseDTO(savedEmployee);
     }
 
-    @Transactional
-    public EmployeeResponseDTO updateEmployee(Long id, EmployeeRequestDTO dto) {
+    public EmployeeResponseDTO updateEmployee(String id, EmployeeRequestDTO dto) {
         Employee existingEmployee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with ID: " + id));
 
@@ -144,22 +138,19 @@ public class EmployeeService {
         }
     }
 
-    @Transactional
-    public void deleteEmployee(Long id) {
+    public void deleteEmployee(String id) {
         Employee existingEmployee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with ID: " + id));
         employeeRepository.delete(existingEmployee);
     }
 
-    @Transactional(readOnly = true)
-    public List<EmployeeResponseDTO> getEmployeesByDepartment(Long departmentId) {
+    public List<EmployeeResponseDTO> getEmployeesByDepartment(String departmentId) {
         return employeeRepository.findByDepartmentId(departmentId).stream()
                 .map(employeeMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
-    public Page<EmployeeResponseDTO> getEmployeesByDepartmentPaginated(Long departmentId, int page, int size, String sortBy, String sortDir) {
+    public Page<EmployeeResponseDTO> getEmployeesByDepartmentPaginated(String departmentId, int page, int size, String sortBy, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())
                 ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
@@ -264,3 +255,4 @@ public class EmployeeService {
         return sb.toString().toUpperCase();
     }
 }
+

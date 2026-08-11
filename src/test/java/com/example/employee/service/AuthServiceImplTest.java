@@ -55,11 +55,12 @@ class AuthServiceImplTest {
     @BeforeEach
     void setUp() {
         user = new User("johndoe", "john@example.com", "encoded_password", Role.ROLE_USER);
-        user.setId(1L);
+        user.setId("1");
 
         loginDto = new LoginDto("johndoe", "password123");
         registerDto = new RegisterDto("johndoe", "john@example.com", "password123", Role.ROLE_USER);
     }
+
 
     @Test
     @DisplayName("login should authenticate user and return JwtAuthResponse")

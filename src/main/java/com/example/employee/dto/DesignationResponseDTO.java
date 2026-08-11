@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class DesignationResponseDTO {
-    private Long id;
+    private String id;
     private String title;
     private String code;
 }
+

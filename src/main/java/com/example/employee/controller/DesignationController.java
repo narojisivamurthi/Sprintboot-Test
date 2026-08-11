@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/designations")
+@RequestMapping("/api/designations")
 public class DesignationController {
+
 
     private final DesignationService designationService;
 
@@ -33,7 +34,7 @@ public class DesignationController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DesignationResponseDTO> getDesignationById(@PathVariable Long id) {
+    public ResponseEntity<DesignationResponseDTO> getDesignationById(@PathVariable String id) {
         return ResponseEntity.ok(designationService.getDesignationById(id));
     }
 
@@ -44,14 +45,15 @@ public class DesignationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DesignationResponseDTO> updateDesignation(@PathVariable Long id,
+    public ResponseEntity<DesignationResponseDTO> updateDesignation(@PathVariable String id,
                                                                     @Valid @RequestBody DesignationRequestDTO dto) {
         return ResponseEntity.ok(designationService.updateDesignation(id, dto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteDesignation(@PathVariable Long id) {
+    public ResponseEntity<String> deleteDesignation(@PathVariable String id) {
         designationService.deleteDesignation(id);
         return ResponseEntity.ok("Designation deleted successfully with ID: " + id);
     }
 }
+

@@ -87,7 +87,7 @@ class AuthControllerTest {
     @Test
     @DisplayName("GET /api/auth/me should return current user details when authenticated")
     void getCurrentUser_ShouldReturnUserDto() throws Exception {
-        UserDto userDto = new UserDto(1L, "johndoe", "john@example.com", Role.ROLE_USER, null);
+        UserDto userDto = new UserDto("1", "johndoe", "john@example.com", Role.ROLE_USER, null);
         when(authService.getCurrentUser("johndoe")).thenReturn(userDto);
 
         org.springframework.security.core.authority.SimpleGrantedAuthority authority =
@@ -106,7 +106,7 @@ class AuthControllerTest {
     @Test
     @DisplayName("GET /api/auth/users should return list of users")
     void getAllUsers_ShouldReturnUserList() throws Exception {
-        UserDto userDto = new UserDto(1L, "johndoe", "john@example.com", Role.ROLE_USER, null);
+        UserDto userDto = new UserDto("1", "johndoe", "john@example.com", Role.ROLE_USER, null);
         when(authService.getAllUsers()).thenReturn(List.of(userDto));
 
         mockMvc.perform(get("/api/auth/users"))
@@ -117,3 +117,4 @@ class AuthControllerTest {
         verify(authService, times(1)).getAllUsers();
     }
 }
+

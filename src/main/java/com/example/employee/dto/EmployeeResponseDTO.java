@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Builder
 public class EmployeeResponseDTO {
 
-    private Long id;
+    private String id;
     private String name;
     private String email;
     private DepartmentResponseDTO department;
@@ -24,3 +24,4 @@ public class EmployeeResponseDTO {
     private CityResponseDTO city;
     private EmployeeStatus status;
 }
+

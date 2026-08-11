@@ -55,7 +55,7 @@ class EmployeeControllerTest {
         objectMapper.registerModule(new JavaTimeModule());
 
         responseDTO = EmployeeResponseDTO.builder()
-                .id(1L)
+                .id("1")
                 .name("Shiva Naroji")
                 .email("shiva@example.com")
                 .salary(60000.0)
@@ -65,9 +65,9 @@ class EmployeeControllerTest {
         requestDTO = EmployeeRequestDTO.builder()
                 .name("Shiva Naroji")
                 .email("shiva@example.com")
-                .departmentId(1L)
-                .designationId(1L)
-                .cityId(1L)
+                .departmentId("1")
+                .designationId("1")
+                .cityId("1")
                 .salary(60000.0)
                 .joiningDate(LocalDate.now())
                 .status(EmployeeStatus.ACTIVE)
@@ -108,14 +108,14 @@ class EmployeeControllerTest {
     @Test
     @DisplayName("GET /employees/{id} should return employee details with HTTP 200 OK")
     void getEmployeeById_ShouldReturnEmployee() throws Exception {
-        when(employeeService.getEmployeeById(1L)).thenReturn(responseDTO);
+        when(employeeService.getEmployeeById("1")).thenReturn(responseDTO);
 
         mockMvc.perform(get("/employees/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.id", is("1")))
                 .andExpect(jsonPath("$.name", is("Shiva Naroji")));
 
-        verify(employeeService, times(1)).getEmployeeById(1L);
+        verify(employeeService, times(1)).getEmployeeById("1");
     }
 
     @Test
@@ -127,7 +127,7 @@ class EmployeeControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestDTO)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.id", is("1")))
                 .andExpect(jsonPath("$.name", is("Shiva Naroji")));
 
         verify(employeeService, times(1)).createEmployee(any(EmployeeRequestDTO.class));
@@ -136,7 +136,7 @@ class EmployeeControllerTest {
     @Test
     @DisplayName("PUT /employees/{id} should update employee and return HTTP 200 OK")
     void updateEmployee_ShouldReturnUpdatedEmployee() throws Exception {
-        when(employeeService.updateEmployee(eq(1L), any(EmployeeRequestDTO.class))).thenReturn(responseDTO);
+        when(employeeService.updateEmployee(eq("1"), any(EmployeeRequestDTO.class))).thenReturn(responseDTO);
 
         mockMvc.perform(put("/employees/1")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -144,18 +144,19 @@ class EmployeeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is("Shiva Naroji")));
 
-        verify(employeeService, times(1)).updateEmployee(eq(1L), any(EmployeeRequestDTO.class));
+        verify(employeeService, times(1)).updateEmployee(eq("1"), any(EmployeeRequestDTO.class));
     }
 
     @Test
     @DisplayName("DELETE /employees/{id} should delete employee and return HTTP 200 OK")
     void deleteEmployee_ShouldReturnSuccessMessage() throws Exception {
-        doNothing().when(employeeService).deleteEmployee(1L);
+        doNothing().when(employeeService).deleteEmployee("1");
 
         mockMvc.perform(delete("/employees/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Employee deleted successfully with ID: 1"));
 
-        verify(employeeService, times(1)).deleteEmployee(1L);
+        verify(employeeService, times(1)).deleteEmployee("1");
     }
 }
+

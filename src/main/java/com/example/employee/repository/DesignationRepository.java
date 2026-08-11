@@ -1,13 +1,13 @@
 package com.example.employee.repository;
 
 import com.example.employee.entity.Designation;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface DesignationRepository extends JpaRepository<Designation, Long> {
+public interface DesignationRepository extends MongoRepository<Designation, String> {
 
     Optional<Designation> findByTitle(String title);
 
@@ -17,3 +17,4 @@ public interface DesignationRepository extends JpaRepository<Designation, Long> 
 
     boolean existsByCode(String code);
 }
+

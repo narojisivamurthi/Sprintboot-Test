@@ -2,7 +2,6 @@ package com.example.employee.controller;
 
 import com.example.employee.dto.CityRequestDTO;
 import com.example.employee.dto.CityResponseDTO;
-import com.example.employee.exception.ResourceNotFoundException;
 import com.example.employee.service.CityService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,7 +46,7 @@ class CityControllerTest {
         objectMapper = new ObjectMapper();
 
         cityResponseDTO = CityResponseDTO.builder()
-                .id(1L)
+                .id("1")
                 .name("Bangalore")
                 .state("Karnataka")
                 .country("India")
@@ -78,15 +77,15 @@ class CityControllerTest {
     @Test
     @DisplayName("GET /cities/{id} should return city details with HTTP 200 OK")
     void getCityById_ShouldReturnCity() throws Exception {
-        when(cityService.getCityById(1L)).thenReturn(cityResponseDTO);
+        when(cityService.getCityById("1")).thenReturn(cityResponseDTO);
 
         mockMvc.perform(get("/cities/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.id", is("1")))
                 .andExpect(jsonPath("$.name", is("Bangalore")));
 
-        verify(cityService, times(1)).getCityById(1L);
+        verify(cityService, times(1)).getCityById("1");
     }
 
     @Test
@@ -98,7 +97,7 @@ class CityControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(cityRequestDTO)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.id", is("1")))
                 .andExpect(jsonPath("$.name", is("Bangalore")));
 
         verify(cityService, times(1)).createCity(any(CityRequestDTO.class));
@@ -107,7 +106,7 @@ class CityControllerTest {
     @Test
     @DisplayName("PUT /cities/{id} should update city and return HTTP 200 OK")
     void updateCity_ShouldReturnUpdatedCity() throws Exception {
-        when(cityService.updateCity(eq(1L), any(CityRequestDTO.class))).thenReturn(cityResponseDTO);
+        when(cityService.updateCity(eq("1"), any(CityRequestDTO.class))).thenReturn(cityResponseDTO);
 
         mockMvc.perform(put("/cities/1")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -115,18 +114,19 @@ class CityControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is("Bangalore")));
 
-        verify(cityService, times(1)).updateCity(eq(1L), any(CityRequestDTO.class));
+        verify(cityService, times(1)).updateCity(eq("1"), any(CityRequestDTO.class));
     }
 
     @Test
     @DisplayName("DELETE /cities/{id} should delete city and return HTTP 200 OK")
     void deleteCity_ShouldReturnSuccessMessage() throws Exception {
-        doNothing().when(cityService).deleteCity(1L);
+        doNothing().when(cityService).deleteCity("1");
 
         mockMvc.perform(delete("/cities/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("City deleted successfully with ID: 1"));
 
-        verify(cityService, times(1)).deleteCity(1L);
+        verify(cityService, times(1)).deleteCity("1");
     }
 }
+

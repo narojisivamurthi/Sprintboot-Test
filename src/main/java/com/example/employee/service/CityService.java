@@ -8,7 +8,6 @@ import com.example.employee.exception.ResourceNotFoundException;
 import com.example.employee.mapper.CityMapper;
 import com.example.employee.repository.CityRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,21 +23,18 @@ public class CityService {
         this.cityMapper = cityMapper;
     }
 
-    @Transactional(readOnly = true)
     public List<CityResponseDTO> getAllCities() {
         return cityRepository.findAll().stream()
                 .map(cityMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
-    public CityResponseDTO getCityById(Long id) {
+    public CityResponseDTO getCityById(String id) {
         City city = cityRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("City not found with ID: " + id));
         return cityMapper.toResponseDTO(city);
     }
 
-    @Transactional
     public CityResponseDTO createCity(CityRequestDTO dto) {
         if (cityRepository.existsByName(dto.getName())) {
             throw new DuplicateResourceException("City already exists with name: " + dto.getName());
@@ -49,8 +45,7 @@ public class CityService {
         return cityMapper.toResponseDTO(saved);
     }
 
-    @Transactional
-    public CityResponseDTO updateCity(Long id, CityRequestDTO dto) {
+    public CityResponseDTO updateCity(String id, CityRequestDTO dto) {
         City city = cityRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("City not found with ID: " + id));
 
@@ -65,10 +60,10 @@ public class CityService {
         return cityMapper.toResponseDTO(updated);
     }
 
-    @Transactional
-    public void deleteCity(Long id) {
+    public void deleteCity(String id) {
         City city = cityRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("City not found with ID: " + id));
         cityRepository.delete(city);
     }
 }
+

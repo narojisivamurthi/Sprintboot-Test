@@ -1,16 +1,5 @@
 package com.example.employee.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -20,19 +9,21 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "employees")
+@Document(collection = "employees")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @NotBlank(message = "Employee name is required")
     @Size(min = 2, max = 50, message = "Employee name must be between 2 and 50 characters")
@@ -40,17 +31,15 @@ public class Employee {
 
     @NotBlank(message = "Email is required")
     @Email(message = "Email must be a valid email address")
-    @Column(nullable = false, unique = true)
+    @Indexed(unique = true)
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id")
+    @DocumentReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Department department;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "designation_id")
+    @DocumentReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Designation designation;
@@ -60,14 +49,11 @@ public class Employee {
 
     private LocalDate joiningDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "city_id")
+    @DocumentReference
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private City city;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
     private EmployeeStatus status;
 
     public Employee(String name, String email, Department department, Designation designation, double salary, LocalDate joiningDate, City city, EmployeeStatus status) {
@@ -81,3 +67,4 @@ public class Employee {
         this.status = status;
     }
 }
+

@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cities")
+@RequestMapping("/api/cities")
 public class CityController {
+
 
     private final CityService cityService;
 
@@ -34,7 +35,7 @@ public class CityController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CityResponseDTO> getCityById(@PathVariable Long id) {
+    public ResponseEntity<CityResponseDTO> getCityById(@PathVariable String id) {
         return ResponseEntity.ok(cityService.getCityById(id));
     }
 
@@ -45,15 +46,16 @@ public class CityController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CityResponseDTO> updateCity(@PathVariable Long id,
+    public ResponseEntity<CityResponseDTO> updateCity(@PathVariable String id,
             @Valid @RequestBody CityRequestDTO dto) {
         return ResponseEntity.ok(cityService.updateCity(id, dto));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<String> deleteCity(@PathVariable Long id) {
+    public ResponseEntity<String> deleteCity(@PathVariable String id) {
         cityService.deleteCity(id);
         return ResponseEntity.ok("City deleted successfully with ID: " + id);
     }
 }
+

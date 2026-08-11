@@ -42,7 +42,7 @@ class CityServiceTest {
     @BeforeEach
     void setUp() {
         city = new City("Bangalore", "Karnataka", "India");
-        city.setId(1L);
+        city.setId("1");
 
         cityRequestDTO = CityRequestDTO.builder()
                 .name("Bangalore")
@@ -51,7 +51,7 @@ class CityServiceTest {
                 .build();
 
         cityResponseDTO = CityResponseDTO.builder()
-                .id(1L)
+                .id("1")
                 .name("Bangalore")
                 .state("Karnataka")
                 .country("India")
@@ -74,22 +74,22 @@ class CityServiceTest {
     @Test
     @DisplayName("getCityById should return CityResponseDTO when city exists")
     void getCityById_Success_ShouldReturnCityResponseDTO() {
-        when(cityRepository.findById(1L)).thenReturn(Optional.of(city));
+        when(cityRepository.findById("1")).thenReturn(Optional.of(city));
         when(cityMapper.toResponseDTO(city)).thenReturn(cityResponseDTO);
 
-        CityResponseDTO result = cityService.getCityById(1L);
+        CityResponseDTO result = cityService.getCityById("1");
 
         assertThat(result).isNotNull();
-        assertThat(result.getId()).isEqualTo(1L);
+        assertThat(result.getId()).isEqualTo("1");
         assertThat(result.getName()).isEqualTo("Bangalore");
     }
 
     @Test
     @DisplayName("getCityById should throw ResourceNotFoundException when city does not exist")
     void getCityById_NotFound_ShouldThrowException() {
-        when(cityRepository.findById(99L)).thenReturn(Optional.empty());
+        when(cityRepository.findById("99")).thenReturn(Optional.empty());
 
-        assertThrows(ResourceNotFoundException.class, () -> cityService.getCityById(99L));
+        assertThrows(ResourceNotFoundException.class, () -> cityService.getCityById("99"));
     }
 
     @Test
@@ -126,18 +126,18 @@ class CityServiceTest {
                 .build();
 
         CityResponseDTO updatedResponse = CityResponseDTO.builder()
-                .id(1L)
+                .id("1")
                 .name("Bangalore Updated")
                 .state("Karnataka")
                 .country("India")
                 .build();
 
-        when(cityRepository.findById(1L)).thenReturn(Optional.of(city));
+        when(cityRepository.findById("1")).thenReturn(Optional.of(city));
         when(cityRepository.existsByName("Bangalore Updated")).thenReturn(false);
         when(cityRepository.save(any(City.class))).thenReturn(city);
         when(cityMapper.toResponseDTO(any(City.class))).thenReturn(updatedResponse);
 
-        CityResponseDTO result = cityService.updateCity(1L, updateDTO);
+        CityResponseDTO result = cityService.updateCity("1", updateDTO);
 
         assertThat(result).isNotNull();
         assertThat(result.getName()).isEqualTo("Bangalore Updated");
@@ -146,10 +146,10 @@ class CityServiceTest {
     @Test
     @DisplayName("deleteCity should remove city when it exists")
     void deleteCity_Success_ShouldDeleteCity() {
-        when(cityRepository.findById(1L)).thenReturn(Optional.of(city));
+        when(cityRepository.findById("1")).thenReturn(Optional.of(city));
         doNothing().when(cityRepository).delete(city);
 
-        cityService.deleteCity(1L);
+        cityService.deleteCity("1");
 
         verify(cityRepository, times(1)).delete(city);
     }
@@ -157,9 +157,10 @@ class CityServiceTest {
     @Test
     @DisplayName("deleteCity should throw ResourceNotFoundException when city does not exist")
     void deleteCity_NotFound_ShouldThrowException() {
-        when(cityRepository.findById(99L)).thenReturn(Optional.empty());
+        when(cityRepository.findById("99")).thenReturn(Optional.empty());
 
-        assertThrows(ResourceNotFoundException.class, () -> cityService.deleteCity(99L));
+        assertThrows(ResourceNotFoundException.class, () -> cityService.deleteCity("99"));
         verify(cityRepository, never()).delete(any());
     }
 }
+

@@ -32,7 +32,13 @@ async function request(endpoint, options = {}) {
       let errorMessage = `HTTP Error ${response.status}`;
       try {
         const errorJson = JSON.parse(errorText);
-        errorMessage = errorJson.message || errorJson.error || errorMessage;
+        if (errorJson.validationErrors && typeof errorJson.validationErrors === 'object' && Object.keys(errorJson.validationErrors).length > 0) {
+          errorMessage = Object.entries(errorJson.validationErrors)
+            .map(([field, msg]) => `${field}: ${msg}`)
+            .join(' | ');
+        } else {
+          errorMessage = errorJson.message || errorJson.error || errorMessage;
+        }
       } catch {
         errorMessage = errorText || errorMessage;
       }
@@ -46,7 +52,14 @@ async function request(endpoint, options = {}) {
     
     const contentType = response.headers.get('content-type');
     if (contentType && contentType.includes('application/json')) {
-      return await response.json();
+      const json = await response.json();
+      if (json && typeof json === 'object' && 'success' in json && 'data' in json) {
+        if (json.success === false) {
+          throw new Error(json.message || 'API request failed');
+        }
+        return json.data !== undefined ? json.data : json;
+      }
+      return json;
     }
     return await response.text();
   } catch (error) {

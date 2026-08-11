@@ -1,15 +1,13 @@
 package com.example.employee.repository;
 
 import com.example.employee.entity.Department;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface DepartmentRepository extends JpaRepository<Department, Long> {
+public interface DepartmentRepository extends MongoRepository<Department, String> {
 
     Optional<Department> findByCode(String code);
 
@@ -18,7 +16,5 @@ public interface DepartmentRepository extends JpaRepository<Department, Long> {
     boolean existsByCode(String code);
 
     boolean existsByName(String name);
-
-    @Query("SELECT d FROM Department d LEFT JOIN FETCH d.employees WHERE d.id = :id")
-    Optional<Department> findByIdWithEmployees(@Param("id") Long id);
 }
+

@@ -1,9 +1,9 @@
 package com.example.employee.security;
 
+import com.example.employee.config.JwtProperties;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -14,20 +14,21 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
 
-    @Value("${app.jwt-secret}")
-    private String jwtSecret;
+    private final JwtProperties jwtProperties;
 
-    @Value("${app.jwt-expiration-milliseconds}")
-    private long jwtExpirationDate;
+    public JwtTokenProvider(JwtProperties jwtProperties) {
+        this.jwtProperties = jwtProperties;
+    }
 
     private SecretKey key() {
-        if (jwtSecret.length() < 32) {
-            return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+        String secret = jwtProperties.getJwtSecret();
+        if (secret == null || secret.length() < 32) {
+            return Keys.hmacShaKeyFor((secret != null ? secret : "default_fallback_secret_key_32bytes").getBytes(StandardCharsets.UTF_8));
         }
         try {
-            return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
+            return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
         } catch (IllegalArgumentException e) {
-            return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+            return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
         }
     }
 
@@ -36,7 +37,7 @@ public class JwtTokenProvider {
         String username = authentication.getName();
 
         Date currentDate = new Date();
-        Date expireDate = new Date(currentDate.getTime() + jwtExpirationDate);
+        Date expireDate = new Date(currentDate.getTime() + jwtProperties.getJwtExpirationMilliseconds());
 
         return Jwts.builder()
                 .subject(username)

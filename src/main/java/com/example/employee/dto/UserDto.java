@@ -12,9 +12,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class UserDto {
 
-    private Long id;
+    private String id;
     private String username;
     private String email;
     private Role role;
     private LocalDateTime createdAt;
 }
+

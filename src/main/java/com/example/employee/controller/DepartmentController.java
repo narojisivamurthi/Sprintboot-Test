@@ -1,5 +1,6 @@
 package com.example.employee.controller;
 
+import com.example.employee.dto.ApiResponse;
 import com.example.employee.dto.DepartmentRequestDTO;
 import com.example.employee.dto.DepartmentResponseDTO;
 import com.example.employee.dto.DepartmentWithEmployeesResponseDTO;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/departments")
+@RequestMapping("/api/departments")
 public class DepartmentController {
 
     private final DepartmentService departmentService;
@@ -29,35 +30,42 @@ public class DepartmentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DepartmentResponseDTO>> getAllDepartments() {
-        return ResponseEntity.ok(departmentService.getAllDepartments());
+    public ResponseEntity<ApiResponse<List<DepartmentResponseDTO>>> getAllDepartments() {
+        List<DepartmentResponseDTO> departments = departmentService.getAllDepartments();
+        return ResponseEntity.ok(ApiResponse.success("Departments retrieved successfully", departments));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DepartmentResponseDTO> getDepartmentById(@PathVariable Long id) {
-        return ResponseEntity.ok(departmentService.getDepartmentById(id));
+    public ResponseEntity<ApiResponse<DepartmentResponseDTO>> getDepartmentById(@PathVariable String id) {
+        DepartmentResponseDTO department = departmentService.getDepartmentById(id);
+        return ResponseEntity.ok(ApiResponse.success("Department retrieved successfully", department));
     }
 
     @GetMapping("/{id}/employees")
-    public ResponseEntity<DepartmentWithEmployeesResponseDTO> getDepartmentWithEmployees(@PathVariable Long id) {
-        return ResponseEntity.ok(departmentService.getDepartmentWithEmployees(id));
+    public ResponseEntity<ApiResponse<DepartmentWithEmployeesResponseDTO>> getDepartmentWithEmployees(@PathVariable String id) {
+        DepartmentWithEmployeesResponseDTO deptWithEmps = departmentService.getDepartmentWithEmployees(id);
+        return ResponseEntity.ok(ApiResponse.success("Department with employees retrieved successfully", deptWithEmps));
     }
 
     @PostMapping
-    public ResponseEntity<DepartmentResponseDTO> createDepartment(@Valid @RequestBody DepartmentRequestDTO dto) {
+    public ResponseEntity<ApiResponse<DepartmentResponseDTO>> createDepartment(@Valid @RequestBody DepartmentRequestDTO dto) {
         DepartmentResponseDTO created = departmentService.createDepartment(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(created);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.success(HttpStatus.CREATED.value(), "Department created successfully", created));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DepartmentResponseDTO> updateDepartment(@PathVariable Long id,
-                                                                  @Valid @RequestBody DepartmentRequestDTO dto) {
-        return ResponseEntity.ok(departmentService.updateDepartment(id, dto));
+    public ResponseEntity<ApiResponse<DepartmentResponseDTO>> updateDepartment(@PathVariable String id,
+                                                                                 @Valid @RequestBody DepartmentRequestDTO dto) {
+        DepartmentResponseDTO updated = departmentService.updateDepartment(id, dto);
+        return ResponseEntity.ok(ApiResponse.success("Department updated successfully", updated));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteDepartment(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<Void>> deleteDepartment(@PathVariable String id) {
         departmentService.deleteDepartment(id);
-        return ResponseEntity.ok("Department deleted successfully with ID: " + id);
+        return ResponseEntity.ok(ApiResponse.success("Department deleted successfully with ID: " + id));
     }
 }
+
+

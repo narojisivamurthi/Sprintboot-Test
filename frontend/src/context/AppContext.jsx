@@ -18,10 +18,15 @@ export function AppProvider({ children }) {
         api.getCities().catch(() => []),
         api.getStatuses().catch(() => ['ACTIVE', 'INACTIVE', 'ON_LEAVE']),
       ]);
-      if (Array.isArray(depts)) setDepartments(depts);
-      if (Array.isArray(desigs)) setDesignations(desigs);
-      if (Array.isArray(cits)) setCities(cits);
-      if (Array.isArray(stats) && stats.length > 0) setStatuses(stats);
+      const deptsList = Array.isArray(depts) ? depts : (depts && Array.isArray(depts.data) ? depts.data : []);
+      const desigsList = Array.isArray(desigs) ? desigs : (desigs && Array.isArray(desigs.data) ? desigs.data : []);
+      const citsList = Array.isArray(cits) ? cits : (cits && Array.isArray(cits.data) ? cits.data : []);
+      const statsList = Array.isArray(stats) ? stats : (stats && Array.isArray(stats.data) ? stats.data : []);
+
+      setDepartments(deptsList);
+      setDesignations(desigsList);
+      setCities(citsList);
+      if (statsList.length > 0) setStatuses(statsList);
       setBackendConnected(true);
     } catch (err) {
       console.error('Failed to load global lookups:', err);

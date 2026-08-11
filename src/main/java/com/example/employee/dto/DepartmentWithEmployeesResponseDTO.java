@@ -13,9 +13,10 @@ import java.util.List;
 @Builder
 public class DepartmentWithEmployeesResponseDTO {
 
-    private Long id;
+    private String id;
     private String name;
     private String code;
     private String location;
     private List<EmployeeSummaryResponseDTO> employees;
 }
+

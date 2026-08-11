@@ -46,7 +46,7 @@ class DesignationControllerTest {
         objectMapper = new ObjectMapper();
 
         responseDTO = DesignationResponseDTO.builder()
-                .id(1L)
+                .id("1")
                 .title("Senior Software Engineer")
                 .code("SSE")
                 .build();
@@ -74,15 +74,15 @@ class DesignationControllerTest {
     @Test
     @DisplayName("GET /designations/{id} should return designation details with HTTP 200 OK")
     void getDesignationById_ShouldReturnDesignation() throws Exception {
-        when(designationService.getDesignationById(1L)).thenReturn(responseDTO);
+        when(designationService.getDesignationById("1")).thenReturn(responseDTO);
 
         mockMvc.perform(get("/designations/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.id", is("1")))
                 .andExpect(jsonPath("$.title", is("Senior Software Engineer")));
 
-        verify(designationService, times(1)).getDesignationById(1L);
+        verify(designationService, times(1)).getDesignationById("1");
     }
 
     @Test
@@ -94,7 +94,7 @@ class DesignationControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestDTO)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.id", is("1")))
                 .andExpect(jsonPath("$.code", is("SSE")));
 
         verify(designationService, times(1)).createDesignation(any(DesignationRequestDTO.class));
@@ -103,7 +103,7 @@ class DesignationControllerTest {
     @Test
     @DisplayName("PUT /designations/{id} should update designation and return HTTP 200 OK")
     void updateDesignation_ShouldReturnUpdatedDesignation() throws Exception {
-        when(designationService.updateDesignation(eq(1L), any(DesignationRequestDTO.class))).thenReturn(responseDTO);
+        when(designationService.updateDesignation(eq("1"), any(DesignationRequestDTO.class))).thenReturn(responseDTO);
 
         mockMvc.perform(put("/designations/1")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -111,18 +111,19 @@ class DesignationControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title", is("Senior Software Engineer")));
 
-        verify(designationService, times(1)).updateDesignation(eq(1L), any(DesignationRequestDTO.class));
+        verify(designationService, times(1)).updateDesignation(eq("1"), any(DesignationRequestDTO.class));
     }
 
     @Test
     @DisplayName("DELETE /designations/{id} should delete designation and return HTTP 200 OK")
     void deleteDesignation_ShouldReturnSuccessMessage() throws Exception {
-        doNothing().when(designationService).deleteDesignation(1L);
+        doNothing().when(designationService).deleteDesignation("1");
 
         mockMvc.perform(delete("/designations/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Designation deleted successfully with ID: 1"));
 
-        verify(designationService, times(1)).deleteDesignation(1L);
+        verify(designationService, times(1)).deleteDesignation("1");
     }
 }
+

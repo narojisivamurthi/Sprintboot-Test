@@ -62,16 +62,16 @@ class EmployeeServiceTest {
     @BeforeEach
     void setUp() {
         department = new Department("Engineering", "ENG", "Floor 3");
-        department.setId(1L);
+        department.setId("1");
 
         designation = new Designation("Software Engineer", "SE");
-        designation.setId(1L);
+        designation.setId("1");
 
         city = new City("Bangalore", "Karnataka", "India");
-        city.setId(1L);
+        city.setId("1");
 
         employee = new Employee();
-        employee.setId(1L);
+        employee.setId("1");
         employee.setName("Shiva Naroji");
         employee.setEmail("shiva@example.com");
         employee.setDepartment(department);
@@ -84,16 +84,16 @@ class EmployeeServiceTest {
         requestDTO = EmployeeRequestDTO.builder()
                 .name("Shiva Naroji")
                 .email("shiva@example.com")
-                .departmentId(1L)
-                .designationId(1L)
-                .cityId(1L)
+                .departmentId("1")
+                .designationId("1")
+                .cityId("1")
                 .salary(60000.0)
                 .joiningDate(LocalDate.now())
                 .status(EmployeeStatus.ACTIVE)
                 .build();
 
         responseDTO = EmployeeResponseDTO.builder()
-                .id(1L)
+                .id("1")
                 .name("Shiva Naroji")
                 .email("shiva@example.com")
                 .salary(60000.0)
@@ -116,30 +116,30 @@ class EmployeeServiceTest {
     @Test
     @DisplayName("getEmployeeById should return employee when ID exists")
     void getEmployeeById_Success_ShouldReturnEmployee() {
-        when(employeeRepository.findById(1L)).thenReturn(Optional.of(employee));
+        when(employeeRepository.findById("1")).thenReturn(Optional.of(employee));
         when(employeeMapper.toResponseDTO(employee)).thenReturn(responseDTO);
 
-        EmployeeResponseDTO result = employeeService.getEmployeeById(1L);
+        EmployeeResponseDTO result = employeeService.getEmployeeById("1");
 
         assertThat(result).isNotNull();
-        assertThat(result.getId()).isEqualTo(1L);
+        assertThat(result.getId()).isEqualTo("1");
     }
 
     @Test
     @DisplayName("getEmployeeById should throw ResourceNotFoundException when ID does not exist")
     void getEmployeeById_NotFound_ShouldThrowException() {
-        when(employeeRepository.findById(99L)).thenReturn(Optional.empty());
+        when(employeeRepository.findById("99")).thenReturn(Optional.empty());
 
-        assertThrows(ResourceNotFoundException.class, () -> employeeService.getEmployeeById(99L));
+        assertThrows(ResourceNotFoundException.class, () -> employeeService.getEmployeeById("99"));
     }
 
     @Test
     @DisplayName("createEmployee should save employee successfully when valid")
     void createEmployee_Success_ShouldSaveAndReturnResponse() {
         when(employeeRepository.existsByEmail("shiva@example.com")).thenReturn(false);
-        when(departmentRepository.findById(1L)).thenReturn(Optional.of(department));
-        when(designationRepository.findById(1L)).thenReturn(Optional.of(designation));
-        when(cityRepository.findById(1L)).thenReturn(Optional.of(city));
+        when(departmentRepository.findById("1")).thenReturn(Optional.of(department));
+        when(designationRepository.findById("1")).thenReturn(Optional.of(designation));
+        when(cityRepository.findById("1")).thenReturn(Optional.of(city));
         when(employeeMapper.toEntity(any(), any(), any(), any())).thenReturn(employee);
         when(employeeRepository.save(employee)).thenReturn(employee);
         when(employeeMapper.toResponseDTO(employee)).thenReturn(responseDTO);
@@ -165,9 +165,9 @@ class EmployeeServiceTest {
     void createEmployee_ZeroSalary_ShouldThrowException() {
         requestDTO.setSalary(0.0);
         when(employeeRepository.existsByEmail("shiva@example.com")).thenReturn(false);
-        when(departmentRepository.findById(1L)).thenReturn(Optional.of(department));
-        when(designationRepository.findById(1L)).thenReturn(Optional.of(designation));
-        when(cityRepository.findById(1L)).thenReturn(Optional.of(city));
+        when(departmentRepository.findById("1")).thenReturn(Optional.of(department));
+        when(designationRepository.findById("1")).thenReturn(Optional.of(designation));
+        when(cityRepository.findById("1")).thenReturn(Optional.of(city));
 
         assertThrows(IllegalArgumentException.class, () -> employeeService.createEmployee(requestDTO));
         verify(employeeRepository, never()).save(any());
@@ -176,10 +176,10 @@ class EmployeeServiceTest {
     @Test
     @DisplayName("deleteEmployee should delete existing employee")
     void deleteEmployee_Success_ShouldDelete() {
-        when(employeeRepository.findById(1L)).thenReturn(Optional.of(employee));
+        when(employeeRepository.findById("1")).thenReturn(Optional.of(employee));
         doNothing().when(employeeRepository).delete(employee);
 
-        employeeService.deleteEmployee(1L);
+        employeeService.deleteEmployee("1");
 
         verify(employeeRepository, times(1)).delete(employee);
     }
@@ -187,9 +187,10 @@ class EmployeeServiceTest {
     @Test
     @DisplayName("deleteEmployee should throw ResourceNotFoundException when employee does not exist")
     void deleteEmployee_NotFound_ShouldThrowException() {
-        when(employeeRepository.findById(99L)).thenReturn(Optional.empty());
+        when(employeeRepository.findById("99")).thenReturn(Optional.empty());
 
-        assertThrows(ResourceNotFoundException.class, () -> employeeService.deleteEmployee(99L));
+        assertThrows(ResourceNotFoundException.class, () -> employeeService.deleteEmployee("99"));
         verify(employeeRepository, never()).delete(any());
     }
 }
+

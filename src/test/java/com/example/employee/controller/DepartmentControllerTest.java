@@ -46,7 +46,7 @@ class DepartmentControllerTest {
         objectMapper = new ObjectMapper();
 
         responseDTO = DepartmentResponseDTO.builder()
-                .id(1L)
+                .id("1")
                 .name("Engineering")
                 .code("ENG")
                 .location("Floor 3")
@@ -76,15 +76,15 @@ class DepartmentControllerTest {
     @Test
     @DisplayName("GET /departments/{id} should return department details with HTTP 200 OK")
     void getDepartmentById_ShouldReturnDepartment() throws Exception {
-        when(departmentService.getDepartmentById(1L)).thenReturn(responseDTO);
+        when(departmentService.getDepartmentById("1")).thenReturn(responseDTO);
 
         mockMvc.perform(get("/departments/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.id", is("1")))
                 .andExpect(jsonPath("$.name", is("Engineering")));
 
-        verify(departmentService, times(1)).getDepartmentById(1L);
+        verify(departmentService, times(1)).getDepartmentById("1");
     }
 
     @Test
@@ -96,7 +96,7 @@ class DepartmentControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestDTO)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.id", is("1")))
                 .andExpect(jsonPath("$.code", is("ENG")));
 
         verify(departmentService, times(1)).createDepartment(any(DepartmentRequestDTO.class));
@@ -105,7 +105,7 @@ class DepartmentControllerTest {
     @Test
     @DisplayName("PUT /departments/{id} should update department and return HTTP 200 OK")
     void updateDepartment_ShouldReturnUpdatedDepartment() throws Exception {
-        when(departmentService.updateDepartment(eq(1L), any(DepartmentRequestDTO.class))).thenReturn(responseDTO);
+        when(departmentService.updateDepartment(eq("1"), any(DepartmentRequestDTO.class))).thenReturn(responseDTO);
 
         mockMvc.perform(put("/departments/1")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -113,18 +113,19 @@ class DepartmentControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is("Engineering")));
 
-        verify(departmentService, times(1)).updateDepartment(eq(1L), any(DepartmentRequestDTO.class));
+        verify(departmentService, times(1)).updateDepartment(eq("1"), any(DepartmentRequestDTO.class));
     }
 
     @Test
     @DisplayName("DELETE /departments/{id} should delete department and return HTTP 200 OK")
     void deleteDepartment_ShouldReturnSuccessMessage() throws Exception {
-        doNothing().when(departmentService).deleteDepartment(1L);
+        doNothing().when(departmentService).deleteDepartment("1");
 
         mockMvc.perform(delete("/departments/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Department deleted successfully with ID: 1"));
 
-        verify(departmentService, times(1)).deleteDepartment(1L);
+        verify(departmentService, times(1)).deleteDepartment("1");
     }
 }
+

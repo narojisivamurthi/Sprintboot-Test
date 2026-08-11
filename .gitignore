@@ -38,3 +38,7 @@ frontend/node_modules/
 frontend/dist/
 frontend/.vite/
 *.log
+
+### Environment files ###
+.env
+.env.local

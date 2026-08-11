@@ -29,12 +29,12 @@ public class EmployeeRequestDTO {
     private String email;
 
     // Provide departmentId OR departmentCode OR departmentName OR nested "department" object
-    private Long departmentId;
+    private String departmentId;
     private String departmentCode;
     private String departmentName;
 
     // Provide designationId OR designationTitle OR designationCode OR nested "designation" object
-    private Long designationId;
+    private String designationId;
     private String designationTitle;
     private String designationCode;
 
@@ -44,7 +44,7 @@ public class EmployeeRequestDTO {
     private LocalDate joiningDate;
 
     // Provide cityId OR cityName OR nested "city" object
-    private Long cityId;
+    private String cityId;
     private String cityName;
 
     private EmployeeStatus status; // ACTIVE, INACTIVE, ON_LEAVE
@@ -53,9 +53,7 @@ public class EmployeeRequestDTO {
     public void setDepartment(Object department) {
         if (department instanceof Map<?, ?> map) {
             if (map.containsKey("id") && map.get("id") != null) {
-                try {
-                    this.departmentId = Long.valueOf(map.get("id").toString());
-                } catch (NumberFormatException ignored) {}
+                this.departmentId = map.get("id").toString();
             }
             if (map.containsKey("code") && map.get("code") != null) {
                 this.departmentCode = map.get("code").toString();
@@ -66,7 +64,7 @@ public class EmployeeRequestDTO {
         } else if (department instanceof String str) {
             this.departmentName = str;
         } else if (department instanceof Number num) {
-            this.departmentId = num.longValue();
+            this.departmentId = num.toString();
         }
     }
 
@@ -74,9 +72,7 @@ public class EmployeeRequestDTO {
     public void setDesignation(Object designation) {
         if (designation instanceof Map<?, ?> map) {
             if (map.containsKey("id") && map.get("id") != null) {
-                try {
-                    this.designationId = Long.valueOf(map.get("id").toString());
-                } catch (NumberFormatException ignored) {}
+                this.designationId = map.get("id").toString();
             }
             if (map.containsKey("code") && map.get("code") != null) {
                 this.designationCode = map.get("code").toString();
@@ -87,7 +83,7 @@ public class EmployeeRequestDTO {
         } else if (designation instanceof String str) {
             this.designationTitle = str;
         } else if (designation instanceof Number num) {
-            this.designationId = num.longValue();
+            this.designationId = num.toString();
         }
     }
 
@@ -95,9 +91,7 @@ public class EmployeeRequestDTO {
     public void setCity(Object city) {
         if (city instanceof Map<?, ?> map) {
             if (map.containsKey("id") && map.get("id") != null) {
-                try {
-                    this.cityId = Long.valueOf(map.get("id").toString());
-                } catch (NumberFormatException ignored) {}
+                this.cityId = map.get("id").toString();
             }
             if (map.containsKey("name") && map.get("name") != null) {
                 this.cityName = map.get("name").toString();
@@ -105,7 +99,8 @@ public class EmployeeRequestDTO {
         } else if (city instanceof String str) {
             this.cityName = str;
         } else if (city instanceof Number num) {
-            this.cityId = num.longValue();
+            this.cityId = num.toString();
         }
     }
 }
+

@@ -2,13 +2,13 @@ package com.example.employee.service;
 
 import com.example.employee.dto.DepartmentRequestDTO;
 import com.example.employee.dto.DepartmentResponseDTO;
-import com.example.employee.dto.DepartmentWithEmployeesResponseDTO;
 import com.example.employee.entity.Department;
 import com.example.employee.exception.DuplicateResourceException;
 import com.example.employee.exception.ResourceNotFoundException;
 import com.example.employee.mapper.DepartmentMapper;
 import com.example.employee.mapper.EmployeeMapper;
 import com.example.employee.repository.DepartmentRepository;
+import com.example.employee.repository.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,6 +32,9 @@ class DepartmentServiceTest {
     private DepartmentRepository departmentRepository;
 
     @Mock
+    private EmployeeRepository employeeRepository;
+
+    @Mock
     private DepartmentMapper departmentMapper;
 
     @Mock
@@ -47,7 +50,7 @@ class DepartmentServiceTest {
     @BeforeEach
     void setUp() {
         department = new Department("Engineering", "ENG", "Floor 3");
-        department.setId(1L);
+        department.setId("1");
 
         requestDTO = DepartmentRequestDTO.builder()
                 .name("Engineering")
@@ -56,7 +59,7 @@ class DepartmentServiceTest {
                 .build();
 
         responseDTO = DepartmentResponseDTO.builder()
-                .id(1L)
+                .id("1")
                 .name("Engineering")
                 .code("ENG")
                 .location("Floor 3")
@@ -78,21 +81,21 @@ class DepartmentServiceTest {
     @Test
     @DisplayName("getDepartmentById should return DepartmentResponseDTO when exists")
     void getDepartmentById_Success_ShouldReturnDepartment() {
-        when(departmentRepository.findById(1L)).thenReturn(Optional.of(department));
+        when(departmentRepository.findById("1")).thenReturn(Optional.of(department));
         when(departmentMapper.toResponseDTO(department)).thenReturn(responseDTO);
 
-        DepartmentResponseDTO result = departmentService.getDepartmentById(1L);
+        DepartmentResponseDTO result = departmentService.getDepartmentById("1");
 
         assertThat(result).isNotNull();
-        assertThat(result.getId()).isEqualTo(1L);
+        assertThat(result.getId()).isEqualTo("1");
     }
 
     @Test
     @DisplayName("getDepartmentById should throw ResourceNotFoundException when not found")
     void getDepartmentById_NotFound_ShouldThrowException() {
-        when(departmentRepository.findById(99L)).thenReturn(Optional.empty());
+        when(departmentRepository.findById("99")).thenReturn(Optional.empty());
 
-        assertThrows(ResourceNotFoundException.class, () -> departmentService.getDepartmentById(99L));
+        assertThrows(ResourceNotFoundException.class, () -> departmentService.getDepartmentById("99"));
     }
 
     @Test
@@ -133,11 +136,12 @@ class DepartmentServiceTest {
     @Test
     @DisplayName("deleteDepartment should delete department when found")
     void deleteDepartment_Success_ShouldDelete() {
-        when(departmentRepository.findById(1L)).thenReturn(Optional.of(department));
+        when(departmentRepository.findById("1")).thenReturn(Optional.of(department));
         doNothing().when(departmentRepository).delete(department);
 
-        departmentService.deleteDepartment(1L);
+        departmentService.deleteDepartment("1");
 
         verify(departmentRepository, times(1)).delete(department);
     }
 }
+

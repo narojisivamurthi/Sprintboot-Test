@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class CityResponseDTO {
-    private Long id;
+    private String id;
     private String name;
     private String state;
     private String country;
 }
+

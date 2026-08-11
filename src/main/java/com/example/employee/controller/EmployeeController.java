@@ -20,8 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employees")
+@RequestMapping("/api/employees")
 public class EmployeeController {
+
 
     private final EmployeeService employeeService;
 
@@ -44,13 +45,13 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EmployeeResponseDTO> getEmployeeById(@PathVariable Long id) {
+    public ResponseEntity<EmployeeResponseDTO> getEmployeeById(@PathVariable String id) {
         return ResponseEntity.ok(employeeService.getEmployeeById(id));
     }
 
     @GetMapping("/department/{departmentId}")
     public ResponseEntity<Page<EmployeeResponseDTO>> getEmployeesByDepartment(
-            @PathVariable Long departmentId,
+            @PathVariable String departmentId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
@@ -65,14 +66,15 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EmployeeResponseDTO> updateEmployee(@PathVariable Long id, @Valid @RequestBody EmployeeRequestDTO dto) {
+    public ResponseEntity<EmployeeResponseDTO> updateEmployee(@PathVariable String id, @Valid @RequestBody EmployeeRequestDTO dto) {
         EmployeeResponseDTO updatedEmployee = employeeService.updateEmployee(id, dto);
         return ResponseEntity.ok(updatedEmployee);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteEmployee(@PathVariable Long id) {
+    public ResponseEntity<String> deleteEmployee(@PathVariable String id) {
         employeeService.deleteEmployee(id);
         return ResponseEntity.ok("Employee deleted successfully with ID: " + id);
     }
 }
+

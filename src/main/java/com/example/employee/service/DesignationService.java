@@ -8,7 +8,6 @@ import com.example.employee.exception.ResourceNotFoundException;
 import com.example.employee.mapper.DesignationMapper;
 import com.example.employee.repository.DesignationRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,21 +23,18 @@ public class DesignationService {
         this.designationMapper = designationMapper;
     }
 
-    @Transactional(readOnly = true)
     public List<DesignationResponseDTO> getAllDesignations() {
         return designationRepository.findAll().stream()
                 .map(designationMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
-    public DesignationResponseDTO getDesignationById(Long id) {
+    public DesignationResponseDTO getDesignationById(String id) {
         Designation designation = designationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Designation not found with ID: " + id));
         return designationMapper.toResponseDTO(designation);
     }
 
-    @Transactional
     public DesignationResponseDTO createDesignation(DesignationRequestDTO dto) {
         if (designationRepository.existsByTitle(dto.getTitle())) {
             throw new DuplicateResourceException("Designation already exists with title: " + dto.getTitle());
@@ -57,8 +53,7 @@ public class DesignationService {
         return designationMapper.toResponseDTO(saved);
     }
 
-    @Transactional
-    public DesignationResponseDTO updateDesignation(Long id, DesignationRequestDTO dto) {
+    public DesignationResponseDTO updateDesignation(String id, DesignationRequestDTO dto) {
         Designation designation = designationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Designation not found with ID: " + id));
 
@@ -74,8 +69,7 @@ public class DesignationService {
         return designationMapper.toResponseDTO(updated);
     }
 
-    @Transactional
-    public void deleteDesignation(Long id) {
+    public void deleteDesignation(String id) {
         Designation designation = designationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Designation not found with ID: " + id));
         designationRepository.delete(designation);
@@ -107,3 +101,4 @@ public class DesignationService {
         return sb.toString().toUpperCase();
     }
 }
+
