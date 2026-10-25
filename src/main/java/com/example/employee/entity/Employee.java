@@ -5,21 +5,27 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Document(collection = "employees")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Employee {
 
     @Id
@@ -54,7 +60,17 @@ public class Employee {
     @EqualsAndHashCode.Exclude
     private City city;
 
-    private EmployeeStatus status;
+    @Builder.Default
+    private EmployeeStatus status = EmployeeStatus.ACTIVE;
+
+    @CreatedDate
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
+
+    @Version
+    private Long version;
 
     public Employee(String name, String email, Department department, Designation designation, double salary, LocalDate joiningDate, City city, EmployeeStatus status) {
         this.name = name;
@@ -64,7 +80,12 @@ public class Employee {
         this.salary = salary;
         this.joiningDate = joiningDate;
         this.city = city;
-        this.status = status;
+        this.status = status != null ? status : EmployeeStatus.ACTIVE;
+    }
+
+    public boolean isActive() {
+        return EmployeeStatus.ACTIVE.equals(this.status);
     }
 }
+
 

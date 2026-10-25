@@ -854,6 +854,129 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "Send Plain Text Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"to\": \"user@example.com\",\n  \"subject\": \"System Notification\",\n  \"body\": \"Your employee profile has been updated successfully.\",\n  \"isHtml\": false\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/notifications/send",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"notifications",
+								"send"
+							]
+						}
+					}
+				},
+				{
+					"name": "Send HTML Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"to\": \"user@example.com\",\n  \"subject\": \"Important Alert\",\n  \"body\": \"<h2 style='color:#4f46e5;'>Important Notification</h2><p>Please review your updated project allocation details.</p>\",\n  \"isHtml\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/notifications/send",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"notifications",
+								"send"
+							]
+						}
+					}
+				},
+				{
+					"name": "Send Welcome Onboarding Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"to\": \"newhire@example.com\",\n  \"employeeName\": \"John Doe\",\n  \"department\": \"Engineering\",\n  \"designation\": \"Software Engineer\",\n  \"temporaryPassword\": \"Welcome#2026\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/notifications/welcome",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"notifications",
+								"welcome"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Notification History",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/notifications/history",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"notifications",
+								"history"
+							]
+						}
+					}
+				},
+				{
+					"name": "Notification Service Health Check",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/notifications/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"notifications",
+								"health"
+							]
+						}
+					}
+				}
+			]
 		}
 	]
 }

@@ -1,0 +1,27 @@
+package com.example.employee.dto;
+
+import com.example.employee.entity.EmployeeStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class EmployeeResponseDTO {
+
+    private String id;
+    private String name;
+    private String email;
+    private DepartmentResponseDTO department;
+    private DesignationResponseDTO designation;
+    private double salary;
+    private LocalDate joiningDate;
+    private CityResponseDTO city;
+    private EmployeeStatus status;
+}
+

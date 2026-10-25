@@ -1,0 +1,14 @@
+# ==============================================================================
+# GLOBAL CONFIGURATION (Shared across all microservices)
+# ==============================================================================
+server:
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always

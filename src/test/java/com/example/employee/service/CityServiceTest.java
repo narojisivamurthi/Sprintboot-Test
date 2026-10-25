@@ -67,7 +67,7 @@ class CityServiceTest {
         List<CityResponseDTO> result = cityService.getAllCities();
 
         assertThat(result).hasSize(1);
-        assertThat(result.get(0).getName()).isEqualTo("Bangalore");
+        assertThat(result.get(0).name()).isEqualTo("Bangalore");
         verify(cityRepository, times(1)).findAll();
     }
 
@@ -80,8 +80,8 @@ class CityServiceTest {
         CityResponseDTO result = cityService.getCityById("1");
 
         assertThat(result).isNotNull();
-        assertThat(result.getId()).isEqualTo("1");
-        assertThat(result.getName()).isEqualTo("Bangalore");
+        assertThat(result.id()).isEqualTo("1");
+        assertThat(result.name()).isEqualTo("Bangalore");
     }
 
     @Test
@@ -103,7 +103,7 @@ class CityServiceTest {
         CityResponseDTO result = cityService.createCity(cityRequestDTO);
 
         assertThat(result).isNotNull();
-        assertThat(result.getName()).isEqualTo("Bangalore");
+        assertThat(result.name()).isEqualTo("Bangalore");
         verify(cityRepository, times(1)).save(any(City.class));
     }
 
@@ -140,7 +140,7 @@ class CityServiceTest {
         CityResponseDTO result = cityService.updateCity("1", updateDTO);
 
         assertThat(result).isNotNull();
-        assertThat(result.getName()).isEqualTo("Bangalore Updated");
+        assertThat(result.name()).isEqualTo("Bangalore Updated");
     }
 
     @Test

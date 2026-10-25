@@ -14,7 +14,11 @@ public class CityMapper {
         }
         String state = dto.getState() != null && !dto.getState().isBlank() ? dto.getState() : "N/A";
         String country = dto.getCountry() != null && !dto.getCountry().isBlank() ? dto.getCountry() : "USA";
-        return new City(dto.getName(), state, country);
+        return City.builder()
+                .name(dto.getName())
+                .state(state)
+                .country(country)
+                .build();
     }
 
     public CityResponseDTO toResponseDTO(City entity) {

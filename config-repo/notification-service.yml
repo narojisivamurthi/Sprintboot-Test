@@ -1,0 +1,29 @@
+# ==============================================================================
+# NOTIFICATION SERVICE CONFIGURATION
+# ==============================================================================
+server:
+  port: ${NOTIFICATION_SERVICE_PORT:8083}
+
+spring:
+  application:
+    name: notification-service
+  mail:
+    host: ${MAIL_HOST:sandbox.smtp.mailtrap.io}
+    port: ${MAIL_PORT:2525}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
+notification:
+  mail:
+    from: ${MAIL_FROM:noreply@employeeportal.com}
+    simulate: ${SIMULATE_MAIL:auto}

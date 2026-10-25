@@ -1,18 +1,16 @@
 package com.example.employee.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+import java.io.Serializable;
+
+/**
+ * Pure 100% Minimalist Java Record for City Response DTO.
+ */
 @Builder
-public class CityResponseDTO {
-    private String id;
-    private String name;
-    private String state;
-    private String country;
-}
-
+public record CityResponseDTO(
+        String id,
+        String name,
+        String state,
+        String country
+) implements Serializable {}

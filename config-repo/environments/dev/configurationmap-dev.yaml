@@ -1,0 +1,26 @@
+# ==============================================================================
+# KUBERNETES CONFIGMAP: DEVELOPMENT ENVIRONMENT (DEV)
+# ==============================================================================
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: microservices-configmap
+  namespace: development
+data:
+  # Downstream Microservice Base URLs (Dev K8s internal DNS)
+  NOTIFICATION_SERVICE_BASE_URL: "http://notification-service.development.svc.cluster.local:8083"
+  EMPLOYEE_SERVICE_BASE_URL: "http://employee-service.development.svc.cluster.local:8082"
+  AUTH_SERVICE_BASE_URL: "http://auth-service.development.svc.cluster.local:8081"
+  GATEWAY_BASE_URL: "http://api-gateway.development.svc.cluster.local:8080"
+
+  # Notification Service Endpoint Paths
+  NOTIFICATION_SERVICE_SEND_EMAIL: "/api/notifications/send"
+  NOTIFICATION_SERVICE_SEND_WELCOME_EMAIL: "/api/notifications/welcome"
+  NOTIFICATION_SERVICE_HEALTH: "/api/notifications/health"
+
+  # Auth Service Endpoint Paths
+  AUTH_SERVICE_VALIDATE_TOKEN: "/api/auth/validate"
+  AUTH_SERVICE_ME: "/api/auth/me"
+
+  # Environment Indicator
+  ENVIRONMENT: "dev"

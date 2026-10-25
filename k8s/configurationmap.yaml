@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: employee-service-configmap
+  namespace: production
+data:
+  # Downstream Notification Service URLs and Endpoints
+  # Injected directly into Spring Boot container as environment variables
+  NOTIFICATION_SERVICE_BASE_URL: "http://notification-service.production.svc.cluster.local:8083"
+  NOTIFICATION_SERVICE_SEND_EMAIL: "/api/notifications/send"
+  NOTIFICATION_SERVICE_SEND_WELCOME_EMAIL: "/api/notifications/welcome"
+  NOTIFICATION_SERVICE_HEALTH: "/api/notifications/health"

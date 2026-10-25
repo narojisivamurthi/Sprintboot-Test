@@ -1,0 +1,60 @@
+# ==============================================================================
+# API GATEWAY CONFIGURATION
+# ==============================================================================
+server:
+  port: ${GATEWAY_PORT:8080}
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:5173"
+              - "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+              - PATCH
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+      routes:
+        # Route to Auth Service
+        - id: auth-service
+          uri: ${AUTH_SERVICE_BASE_URL:http://localhost:8081}
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: authServiceCircuitBreaker
+                fallbackUri: forward:/fallback/auth
+
+        # Routes to Employee Core Service
+        - id: employee-service
+          uri: ${EMPLOYEE_SERVICE_BASE_URL:http://localhost:8082}
+          predicates:
+            - Path=/api/employees/**,/api/cities/**,/api/departments/**,/api/designations/**,/api/statuses/**,/api/employee-statuses/**,/api/health/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: employeeServiceCircuitBreaker
+                fallbackUri: forward:/fallback/employee
+
+        # Routes to Notification Service
+        - id: notification-service
+          uri: ${NOTIFICATION_SERVICE_BASE_URL:http://localhost:8083}
+          predicates:
+            - Path=/api/notifications/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: notificationServiceCircuitBreaker
+                fallbackUri: forward:/fallback/notification
